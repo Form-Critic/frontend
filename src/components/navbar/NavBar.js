@@ -10,7 +10,7 @@ const NavBar = () => {
             <AppBar position='static'>
                 <ToolBar>
                     <Typography variant='title' color='inherit'>
-                        React & Material-UI Sample Application
+                        The Form Critic
                     </Typography>
                 </ToolBar>
             </AppBar>
