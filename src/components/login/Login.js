@@ -12,7 +12,7 @@ const Login = () => {
     return (
         <>
             <TextField  variant="outlined" onChange={changeHandler} name='username' required placeholder='username' label='username' autoFocus margin='normal'></TextField>
-            <TextField  variant="outlined" onChange={changeHandler} name='password' required placeholder='password' label='password' autoFocus margin='normal'></TextField>
+            <TextField  variant="outlined" onChange={changeHandler} name='password' required placeholder='password' label='password'  margin='normal'></TextField>
             <Button type='submit' fullWidth variant='contained'>Sign In</Button>
         </>
     );

@@ -13,9 +13,9 @@ const Register = () => {
     return (
         <>
             <TextField  variant="outlined" name='name' onChange={changeHandler} required placeholder='name' label='name' autoFocus margin='normal'></TextField>
-            <TextField  variant="outlined" name='email' onChange={changeHandler} required placeholder='email' label='email' autoFocus margin='normal'></TextField>
-            <TextField  variant="outlined" name='username' onChange={changeHandler} required placeholder='username' label='username' autoFocus margin='normal'></TextField>
-            <TextField  variant="outlined" name='password' onChange={changeHandler} required placeholder='password' label='password' autoFocus margin='normal'></TextField>
+            <TextField  variant="outlined" name='email' onChange={changeHandler} required placeholder='email' label='email'  margin='normal'></TextField>
+            <TextField  variant="outlined" name='username' onChange={changeHandler} required placeholder='username' label='username'  margin='normal'></TextField>
+            <TextField  variant="outlined" name='password' onChange={changeHandler} required placeholder='password' label='password'  margin='normal'></TextField>
             <Button type='submit' fullWidth variant='contained'>Sign Up</Button>
         </>
     );
