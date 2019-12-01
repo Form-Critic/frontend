@@ -63,21 +63,24 @@ export const GET_MESSAGE_FAIL = 'GET_MESSAGE_FAIL'
 export const postLoginUser = payload=>dispatch=>{
     dispatch({type:LOGIN_START})
     axios
-    .post('http://localhost:8080', payload.credentials)
+    .post('http://localhost:8080/api/users/login', payload)
     .then(res=>{
         dispatch({type:LOGIN_SUCCESS, payload:res.data})
-        payload.props.history.push('/')
+        // payload.props.history.push('/')
     })
     .catch(err => dispatch({ type: LOGIN_FAIL, payload: err }))
 }
 
 export const postRegisterUser = payload=> dispatch=>{
+    console.log('hello!!!!@FEW', payload)
     dispatch({type:REGISTER_START})
     axios
-    .post('http://localhost:8080', payload.registerUsers)
+    .post('http://localhost:8080/api/users/register', payload)
     .then(res=>{
         dispatch({type:REGISTER_SUCCESS, payload:res.data})
     })
-    .catch(err=> dispatch({type:REGISTER_FAIL, payload: err}))
+    .catch(err=> {
+        console.log(err)
+        dispatch({type:REGISTER_FAIL, payload: err})})
     
 }

@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box'
 import Switch from '@material-ui/core/Switch';
 
+import { useSelector, useDispatch} from 'react-redux'
+
 import Login from './Login'
 import Register from './Register'
 
@@ -19,9 +21,13 @@ const useStyles = makeStyles({
 });
 
 export default function ClassesNesting() {
+
+  const dispatch = useDispatch()
+  const currentState = useSelector(state=>state)
   const classes = useStyles();
   const [register, setRegister] = useState(true) // toggles the switch to change from register and login
 
+  console.log(dispatch, currentState)
   return (
     <FormControl
       classes={{
