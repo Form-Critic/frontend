@@ -7,10 +7,13 @@ import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography'
 
   const useStyles = makeStyles(theme => ({
     card: {
-      maxWidth: 345,
+      width: '100%',
+      flexWrap:'wrap'
+    //   maxWidth: 345,
     },
     media: {
       height: 0,
@@ -30,11 +33,20 @@ import Paper from '@material-ui/core/Paper';
       backgroundColor: deepPurple[500],
     },
     paper: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(4),
         margin: 'auto',
         width:'90%',
-        background:'whitesmoke'
+        background:'whitesmoke',
+        display:'flex',
+        justifyContent:'center',
+        flexWrap:'wrap'
       },
+      gridItem:{
+        margin: '1% auto',
+      },
+      CardHeader:{
+        fontSize: '36px',
+      }
   }));
 
 
@@ -42,7 +54,7 @@ const Post = ({post, props}) => {
 
     const classes = useStyles();
     const video_id = (post.video_link.split('='))[1]
-    const thumbnail =`https://img.youtube.com/vi/${video_id}/hqdefault.jpg`
+    const thumbnail =`https://img.youtube.com/vi/${video_id}/sddefault.jpg`
     const firstLetter = post.user.split('')[0]
 
     const formatDate = timeObj=>{
@@ -54,16 +66,18 @@ const Post = ({post, props}) => {
     }
 
     return (
-        <div className={classes.paper}>
+      <Grid className={classes.gridItem} item xs={10} sm={9} md={5} xl={7}>
             <Card className={classes.card}>
                 <CardHeader
                 avatar={ <Avatar className={classes.avatar}>{firstLetter}</Avatar>}
                 title={post.title}
+                titleTypographyProps={{variant:"h6"}}
                 subheader={(post.date)}
+                subheaderTypographyProps={{variant:"h6"}}
                 />
                 <CardMedia className={classes.media} image={(thumbnail)}   title={post.exercise}/>
             </Card>
-        </div>
+        </Grid>
     );
 };
 

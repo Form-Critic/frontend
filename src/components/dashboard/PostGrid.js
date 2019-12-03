@@ -11,6 +11,7 @@ const useStyles = makeStyles(theme => ({
       flexGrow: 1,
       margin: '2%',
       display:'flex',
+      wrap:'wrap'
     },
     paper: {
         padding: theme.spacing(2),
@@ -30,9 +31,9 @@ const PostGrid = (props) => {
     },[])
     console.log(currentState)
     return (
-        <div className={classes.root}>
+        <Grid container spacing={20}>
             {currentState.length?currentState.map(post=> <Post post={post} props={props}/>):<></>}
-        </div>
+        </Grid>
     );
 };
 
