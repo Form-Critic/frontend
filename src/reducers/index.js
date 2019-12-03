@@ -37,6 +37,8 @@ const initialState = {
     isLoggedIn: false,
     loginError: '',
     registerError:'',
+    postError:'',
+    isLoading:false,
     user:{},
     posts:[],
     messages:[]
@@ -64,7 +66,6 @@ export default (state = initialState, action) => {
                 isLoggingIn:false,
                 token: action.payload.token,
                 user:{name:action.payload.name, email:action.payload.email, username:action.payload.username}
-
             }
         }
         case REGISTER_START:{
@@ -88,6 +89,26 @@ export default (state = initialState, action) => {
                 isLoggingIn:false,
                 token: action.payload.token,
                 user:{name:action.payload.name, email:action.payload.email, username:action.payload.username}
+            }
+        }
+        case GET_POST_START:{
+            return{
+                ...state,
+                isLoading:true
+            }
+        }
+        case GET_POST_FAIL:{
+            return{
+                ...state,
+                isLoading:false,
+                postError: action.payload
+            }
+        }
+        case GET_POST_SUCCESS:{
+            return{
+                ...state,
+                isLoading:false,
+                posts: [...action.payload]
             }
         }
         default:{

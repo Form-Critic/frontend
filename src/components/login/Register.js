@@ -11,7 +11,7 @@ const Register = (props) => {
     const dispatch = useDispatch()
     const currentState = useSelector(state=>state)
     const [credentials, setCredentials] = useState({})
-    
+
     const changeHandler = (e)=>{
         setCredentials({...credentials, [e.target.name]: e.target.value})
     }
@@ -21,7 +21,7 @@ const Register = (props) => {
             <TextField  variant="outlined" name='email' onChange={changeHandler} required placeholder='email' label='email'  margin='normal'></TextField>
             <TextField  variant="outlined" name='username' onChange={changeHandler} required placeholder='username' label='username'  margin='normal'></TextField>
             <TextField  variant="outlined" name='password' onChange={changeHandler} required placeholder='password' label='password'  margin='normal'></TextField>
-            <Button type='submit' onClick={()=>{dispatch(postRegisterUser(credentials))}} fullWidth variant='contained'>Sign Up</Button>
+            <Button type='submit' onClick={()=>{dispatch(postRegisterUser({credentials,props}))}} fullWidth variant='contained'>Sign Up</Button>
         </>
     );
 };

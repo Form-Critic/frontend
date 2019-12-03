@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ClassesNesting() {
+export default function ClassesNesting(props) {
 
   const dispatch = useDispatch()
   const currentState = useSelector(state=>state)
@@ -36,13 +36,7 @@ export default function ClassesNesting() {
       }}
     >
       <Typography variant='h4'>Welcome</Typography>
-        {/* <Typography variant='h4'>Welcome</Typography>
-        <TextField variant="outlined" required placeholder='Name' label='Name' autoFocus margin='normal'></TextField>
-        <TextField variant="outlined" required placeholder='Email' label='Email' autoFocus margin='normal'></TextField>
-        <TextField variant="outlined" required placeholder='Username' label='Username' autoFocus margin='normal'></TextField>
-        <TextField variant="outlined" required placeholder='Password' label='Password' autoFocus margin='normal'></TextField>
-        <Button type='submit' fullWidth variant='contained'>Sign up</Button> */}
-        {register?<Register/>:<Login/>}
+        {register?<Register props={props}/>:<Login props={props}/>}
         <Box display='flex' justifyContent='space-between' alignContent='center' alignItems='center' margin='20px'>   
             <Typography color='primary'>Already Have an Account?</Typography>
             <Switch

@@ -63,16 +63,17 @@ export const GET_MESSAGE_FAIL = 'GET_MESSAGE_FAIL'
 export const postLoginUser = payload=>dispatch=>{
     dispatch({type:LOGIN_START})
     axios
-    .post('http://localhost:8080/api/users/login', payload)
+    .post('http://localhost:8080/api/users/login', payload.credentials)
     .then(res=>{
         dispatch({type:LOGIN_SUCCESS, payload:res.data})
-        // payload.props.history.push('/')
+        console.log('token', res.data.token)
+        localStorage.setItem('token', res.data.token)
+        payload.props.history.push('/dash')
     })
     .catch(err => dispatch({ type: LOGIN_FAIL, payload: err }))
 }
 
 export const postRegisterUser = payload=> dispatch=>{
-    console.log('hello!!!!@FEW', payload)
     dispatch({type:REGISTER_START})
     axios
     .post('http://localhost:8080/api/users/register', payload)
@@ -83,4 +84,17 @@ export const postRegisterUser = payload=> dispatch=>{
         console.log(err)
         dispatch({type:REGISTER_FAIL, payload: err})})
     
+}
+
+export const getPosts = payload => dispatch =>{
+    dispatch({type:GET_POST_START})
+    axiosWithAuth()
+    .get('/posts')
+    .then(res=>{
+        dispatch( {type:GET_POST_SUCCESS, payload:res.data})
+    })
+    .catch(err=>{
+        console.log(err)
+        dispatch({type:GET_POST_FAIL, payload: err})
+    })
 }
