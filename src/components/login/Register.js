@@ -17,11 +17,19 @@ const Register = (props) => {
     }
     return (
         <>
-            <TextField  variant="outlined" name='name' onChange={changeHandler} required placeholder='name' label='name' autoFocus margin='normal'></TextField>
-            <TextField  variant="outlined" name='email' onChange={changeHandler} required placeholder='email' label='email'  margin='normal'></TextField>
-            <TextField  variant="outlined" name='username' onChange={changeHandler} required placeholder='username' label='username'  margin='normal'></TextField>
-            <TextField  variant="outlined" name='password' onChange={changeHandler} required placeholder='password' label='password'  margin='normal'></TextField>
-            <Button type='submit' onClick={()=>{dispatch(postRegisterUser({credentials,props}))}} fullWidth variant='contained'>Sign Up</Button>
+            <TextField fullWidth  variant="outlined" name='name' onChange={changeHandler} required placeholder='name' label='name' autoFocus margin='normal'></TextField>
+            <TextField fullWidth  variant="outlined" name='email' onChange={changeHandler} required placeholder='email' label='email'  margin='normal'></TextField>
+            <TextField fullWidth  variant="outlined" name='username' onChange={changeHandler} required placeholder='username' label='username'  margin='normal'></TextField>
+            <TextField fullWidth  variant="outlined" name='password' onChange={changeHandler} required placeholder='password' label='password'  margin='normal'></TextField>
+            <Button 
+            onClick={()=>{dispatch(postRegisterUser({credentials,props}))}} 
+            type="submit"
+            style={{margin: '6% auto 2% auto'}}
+            fullWidth
+            variant="contained"
+            color="primary"
+            // style={}
+            >register</Button>
         </>
     );
 };
