@@ -87,19 +87,6 @@ export default function SignInSide(props) {
           <form className={classes.form} noValidate>
             {/* Bringing Components over! */}
           {register?<Register props={props}/>:<Login props={props}/>}
-            {/* <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> */}
-            {/* <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-          {register?'Register':'Sign in'}
-            </Button> */}
             <Grid className={classes.lastGrid} container>
             <Grid item>
               <Link href="#" variant="body2">

@@ -2,6 +2,9 @@ import{
     DELETE_POST_START,
     DELETE_POST_SUCCESS,
     DELETE_POST_FAIL,
+    GET_POSTS_START,
+    GET_POSTS_SUCCESS,
+    GET_POSTS_FAIL,
     GET_POST_START,
     GET_POST_SUCCESS,
     GET_POST_FAIL,
@@ -41,6 +44,7 @@ const initialState = {
     isLoading:false,
     user:{},
     posts:[],
+    post:{comments:[]},
     messages:[]
 }
 export default (state = initialState, action) => {
@@ -91,6 +95,26 @@ export default (state = initialState, action) => {
                 user:{name:action.payload.name, email:action.payload.email, username:action.payload.username}
             }
         }
+        case GET_POSTS_START:{
+            return{
+                ...state,
+                isLoading:true
+            }
+        }
+        case GET_POSTS_FAIL:{
+            return{
+                ...state,
+                isLoading:false,
+                postError: action.payload
+            }
+        }
+        case GET_POSTS_SUCCESS:{
+            return{
+                ...state,
+                isLoading:false,
+                posts: [...action.payload]
+            }
+        }
         case GET_POST_START:{
             return{
                 ...state,
@@ -108,7 +132,29 @@ export default (state = initialState, action) => {
             return{
                 ...state,
                 isLoading:false,
-                posts: [...action.payload]
+                post: {...action.payload}
+            }
+        }
+        case GET_COMMENT_START:{
+            return{
+                ...state,
+                isLoading:true
+            }
+        }
+        case GET_COMMENT_FAIL:{
+            return{
+                ...state,
+                isLoading:false,
+                postError: action.payload
+            }
+        }
+        case GET_COMMENT_SUCCESS:{
+            return{
+                ...state,
+                isLoading:false,
+                post: {...state.post,
+                    'comments':[...action.payload]
+                }
             }
         }
         default:{
