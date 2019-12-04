@@ -5,8 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-ro
 import PrivateRoute from './utils/PrivateRoute'
 //components
 import Dashboard from './components/dashboard/Dashboard'
-import StartForm from './components/login/StartForm'
-import NewSiginin from './components/login/NewSignIn'
+import NewSiginIn from './components/login/NewSignIn'
 import NavBar from './components/navbar/NavBar'
 import './App.css';
 
@@ -16,7 +15,7 @@ function App(props) {
       <Router>
         {/* <Link path='/register' component={Register}>Register
         </Link> */}
-        <Route path='/register' component={NewSiginin} props={props}/>
+        <Route path='/register' component={NewSiginIn} props={props}/>
         <PrivateRoute path='/dash' component={Dashboard} props={props}/>
       </Router>
 
