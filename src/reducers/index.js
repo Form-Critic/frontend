@@ -157,6 +157,28 @@ export default (state = initialState, action) => {
                 }
             }
         }
+        case CREATE_COMMENT_START:{
+            return{
+                ...state,
+                isLoading:true
+            }
+        }
+        case CREATE_COMMENT_FAIL:{
+            return{
+                ...state,
+                isLoading:false,
+                postError: action.payload
+            }
+        }
+        case CREATE_COMMENT_SUCCESS:{
+            return{
+                ...state,
+                isLoading:false,
+                post: {...state.post,
+                    'comments':[...state.post.comments,action.payload]
+                }
+            }
+        }
         default:{
             return state
         }

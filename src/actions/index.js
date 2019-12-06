@@ -129,3 +129,17 @@ export const getComments = payload => dispatch =>{
         dispatch({type:GET_COMMENT_FAIL, payload: err})
     })
 }
+
+export const postComment = payload => dispatch =>{
+    console.log(payload)
+    dispatch({type:CREATE_COMMENT_START})
+    axiosWithAuth()
+    .post(`/posts/${payload.id}/comments`,payload.newComment)
+    .then(res=>{
+        dispatch({type:CREATE_COMMENT_SUCCESS, payload:res.data})
+    })
+    .catch(err=>{
+        console.log(err)
+        dispatch({type:CREATE_COMMENT_FAIL, payload: err})
+    })
+}

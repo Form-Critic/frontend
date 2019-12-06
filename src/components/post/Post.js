@@ -46,7 +46,7 @@ const Post = (props) => {
             >
             </iframe>
             <div className={classes.root}>
-                <Comments comments={currentState.post.comments}></Comments>
+                <Comments comments={currentState.post.comments} props={props}></Comments>
             </div>
         </div>
     );

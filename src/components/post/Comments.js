@@ -1,25 +1,21 @@
-import React from 'react'
-import Typography from '@material-ui/core/Typography'
-import Avatar from '@material-ui/core/Avatar';
-import { makeStyles } from '@material-ui/core/styles';
+import React,{ useState } from 'react'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
-
+import { useSelector, useDispatch} from 'react-redux'
+import { postComment } from '../../actions/index'
+//component
 import CommentComp from './CommentComp'
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        margin: '2% auto',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignContent: 'center',
-        alignItems: 'center',
-        width: '60%'
+const Comments = ({ comments, props }) => {
+    console.log(props.match.params.id)
+    const dispatch = useDispatch()
+    const currentState = useSelector(state=>state)
+    console.log(currentState)
 
-    },
-})
-)
+    const [newComment, setNewComment] = useState({comment:''})
+    const changeHandler = (e)=>{
+        setNewComment({[e.target.name]:e.target.value})
+    }
 
-const Comments = ({ comments }) => {
     console.log(comments)
     return (
     <Comment.Group>
@@ -28,8 +24,16 @@ const Comments = ({ comments }) => {
         </Header>
         {comments.map(comment => <CommentComp comment={comment} />)}
         <Form reply>
-            <Form.TextArea />
-            <Button content='Add Comment' labelPosition='left' icon='edit' primary />
+            <Form.TextArea 
+            name='comment'
+            value={newComment.comment}
+            onChange={(e)=>{changeHandler(e)}}
+            />
+            <Button onClick={(e)=>{
+                e.preventDefault()
+                dispatch(postComment({newComment, id:Number(props.match.params.id)}))
+                setNewComment({comment:''})
+            }} content='Add Comment' labelPosition='left' icon='edit' primary />
         </Form>
     </Comment.Group>
     )

@@ -4,24 +4,9 @@ import Typography from '@material-ui/core/Typography'
 import Avatar from '@material-ui/core/Avatar';
 import { makeStyles } from '@material-ui/core/styles';
 // import avatar from '../../static/user.png'
-import { useSelector, useDispatch} from 'react-redux'
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        margin: '2% auto',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignContent: 'center',
-        alignItems: 'center',
-        width: '60%'
-
-    },
-})
-)
 
 
 const CommentComp = ({comment}) => {
-    console.log('hello!!!', comment)
     return (
         <Comment>
         <Comment.Avatar as='a' src={comment.avatar} />
