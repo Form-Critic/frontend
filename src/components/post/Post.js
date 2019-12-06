@@ -46,8 +46,8 @@ const Post = (props) => {
             width="560"
             height="315"
             src={embedLink}
-            allowfullscreen
-            frameborder="0"
+            allowFullScreen
+            frameBorder="0"
             >
             </iframe>
             <div className={classes.root}>

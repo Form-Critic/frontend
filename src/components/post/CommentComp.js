@@ -1,16 +1,13 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 
 import {Comment,  CommentAction } from 'semantic-ui-react'
-import {useDispatch, useSelector} from 'react-redux'
-import { getCurrentUser, deleteComment } from '../../actions/index'
+import {useDispatch} from 'react-redux'
+import { deleteComment } from '../../actions/index'
 
 
-const CommentComp = ({comment}) => {
+const CommentComp = ({comment, currentUserId}) => {
+  console.log(currentUserId)
   const dispatch = useDispatch()
-  const currentUser = useSelector(state=>state.currentUser)
-  useEffect(()=>{
-        dispatch(getCurrentUser())
-    },[])
 
   const deleteThisComment = (id)=>{
     dispatch(deleteComment(id))
@@ -26,7 +23,7 @@ const CommentComp = ({comment}) => {
           {/* <Comment.Metadata >
             {comment.date}
           </Comment.Metadata> */}
-          {currentUser.id===comment.user_id?<CommentAction onClick={(e)=>{
+          {currentUserId===comment.user_id?<CommentAction onClick={(e)=>{
             e.preventDefault()
             deleteThisComment(comment.id)
           }} style={{color:'red', cursor:'pointer'}}>delete</CommentAction>:null}
