@@ -157,7 +157,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading:false,
                 post: {...state.post,
-                    'comments':[...action.payload]
+                    comments:[...action.payload]
                 }
             }
         }
@@ -179,7 +179,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading:false,
                 post: {...state.post,
-                    'comments':[...state.post.comments,action.payload]
+                    comments:[...state.post.comments,action.payload]
                 }
             }
         }
@@ -216,11 +216,11 @@ export default (state = initialState, action) => {
                 postError: action.payload
             }
         }
-        case DELETE_COMMENT_SUCCESS:{    
+        case DELETE_COMMENT_SUCCESS:{ 
             return{
                 ...state,
                 isLoading:false,
-                [state.post.comments]:{...state.post, comments: state.post.comments.filter(comment=>comment.id!==action.payload.id)}
+                post:{...state.post, comments: state.post.comments.filter(comment=>comment.id!==action.payload.id)}
             }
         }
         default:{
