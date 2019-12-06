@@ -1,12 +1,21 @@
-import React from 'react';
-import { Button, Comment, Form } from 'semantic-ui-react'
-import Typography from '@material-ui/core/Typography'
-import Avatar from '@material-ui/core/Avatar';
-import { makeStyles } from '@material-ui/core/styles';
-// import avatar from '../../static/user.png'
+import React, {useEffect} from 'react';
+
+import {Comment,  CommentAction } from 'semantic-ui-react'
+import {useDispatch, useSelector} from 'react-redux'
+import { getCurrentUser, deleteComment } from '../../actions/index'
 
 
 const CommentComp = ({comment}) => {
+  const dispatch = useDispatch()
+  const currentUser = useSelector(state=>state.currentUser)
+  useEffect(()=>{
+        dispatch(getCurrentUser())
+    },[])
+
+  const deleteThisComment = (id)=>{
+    dispatch(deleteComment(id))
+  }
+
     return (
         <Comment>
         <Comment.Avatar as='a' src={comment.avatar} />
@@ -17,6 +26,10 @@ const CommentComp = ({comment}) => {
           {/* <Comment.Metadata >
             {comment.date}
           </Comment.Metadata> */}
+          {currentUser.id===comment.user_id?<CommentAction onClick={(e)=>{
+            e.preventDefault()
+            deleteThisComment(comment.id)
+          }} style={{color:'red', cursor:'pointer'}}>delete</CommentAction>:null}
           <Comment.Text>
             <p style={{textAlign:'left'}}>{comment.comment}</p>
           </Comment.Text>

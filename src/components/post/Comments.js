@@ -5,8 +5,8 @@ import { postComment } from '../../actions/index'
 //component
 import CommentComp from './CommentComp'
 
-const Comments = ({ comments, props }) => {
-    console.log(props.match.params.id)
+const Comments = ({ comments, props, currentUser }) => {
+    console.log('this one!',currentUser)
     const dispatch = useDispatch()
     const currentState = useSelector(state=>state)
     console.log(currentState)
@@ -16,7 +16,6 @@ const Comments = ({ comments, props }) => {
         setNewComment({[e.target.name]:e.target.value})
     }
 
-    console.log(comments)
     return (
     <Comment.Group>
          <Header as='h3' dividing>
