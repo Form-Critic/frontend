@@ -31,6 +31,9 @@ function Copyright() {
   );
 }
 
+
+//notes delete PostGrid and Post if they are not in use!
+
 const useStyles = makeStyles(theme => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -104,8 +107,8 @@ export default function Album() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button variant="contained" color="primary">
-                    Main call to action
+                  <Button href={'/NewPost'} variant="contained" color="primary">
+                    Start Here
                   </Button>
                 </Grid>
                 <Grid item>
@@ -142,9 +145,11 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
-                      View
-                    </Button>
+                    <Link href={`/post/${post.id}`}>
+                      <Button size="small" color="primary">
+                        View
+                      </Button>
+                    </Link>
                   </CardActions>
                 </Card>
               </Grid>

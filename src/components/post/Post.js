@@ -24,6 +24,7 @@ const useStyles = makeStyles(theme=>({
 })
 )
 
+//things that still need to be worked on --> 1. UX, needs lots of styling. 2. Integrate replies 3. Fix the dates. 4. Make user clickable 5. Add make sure to delete comments
 
 
 const Post = (props) => {

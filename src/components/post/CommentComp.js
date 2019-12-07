@@ -6,7 +6,7 @@ import { deleteComment } from '../../actions/index'
 
 
 const CommentComp = ({comment, currentUserId}) => {
-  console.log(currentUserId)
+  
   const dispatch = useDispatch()
 
   const deleteThisComment = (id)=>{
