@@ -15,9 +15,10 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import Button from '@material-ui/core/Button'
 import { Dialog, DialogTitle, DialogContent, DialogContentText } from '@material-ui/core'
+
 import { useDispatch, useSelector } from 'react-redux'
 import exercises from './options'
-
+import { createPost } from '../../actions/index'
 
 
 function Copyright() {
@@ -121,17 +122,19 @@ const changeHandler = e =>{
   setPostField({
     ...postField, [e.target.name]: e.target.value
   })
-  console.log(postField)
+}
+
+const submitPost = completePost =>{
+    dispatch(createPost(completePost))
+    handleClose()
 }
 
   return (
     <Dialog className={classes.root} aria-labelledby="simple-dialog-title" onClose={handleClose} open={open}>
-      {/* <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle> */}
       <Paper className={classes.paper}>
         <Typography component="h1" variant="h4" align="center">
           Create Post
           </Typography>
-        {/* <FormControl className={classes.fieldContainer}> */}
         <TextField fullWidth label="Title" className={classes.field} name='title' value={postField.title} onChange={(e)=>changeHandler(e)}></TextField>
         <TextField InputProps={{
           startAdornment: (
@@ -169,7 +172,7 @@ const changeHandler = e =>{
           rows="6"
           helperText="Please explain in as much detail as possible what you feel when performing this exercise and any other relevant information"
         />
-        <Button className={classes.field} variant="contained" color="primary">SUBMIT</Button>
+        <Button onClick={()=>{submitPost(postField)}} className={classes.field} variant="contained" color="primary">SUBMIT</Button>
       </Paper>
     </Dialog>
   );

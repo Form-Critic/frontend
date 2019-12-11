@@ -180,6 +180,7 @@ export const deleteComment = payload => dispatch=>{
 }
 
 export const createPost = payload => dispatch =>{
+    console.log(payload)
     dispatch({type:CREATE_POST_START})
     axiosWithAuth()
     .post('/posts', payload)
