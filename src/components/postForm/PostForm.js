@@ -82,7 +82,7 @@ const useStyles = makeStyles(theme => ({
 
   field: {
     width: '90%',
-    margin: '2% auto',
+    margin: '3% auto',
   },
   formControl: {
     margin: theme.spacing(1),

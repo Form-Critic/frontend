@@ -119,15 +119,15 @@ export default function Album() {
               <Grid container spacing={2} justify="center">
                 <Grid item>
                   <Button onClick={handleClickOpen} variant="contained" color="primary">
-                    Start Here
+                    Get Started
                   </Button>
                   <PostForm  open={open} onClose={handleClose}/>
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                   <Button variant="outlined" color="primary">
                     Secondary action
                   </Button>
-                </Grid>
+                </Grid> */}
               </Grid>
             </div>
           </Container>
