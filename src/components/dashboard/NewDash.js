@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -14,9 +14,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CardActionArea from '@material-ui/core/CardActionArea'
 import Link from '@material-ui/core/Link';
-import {useDispatch, useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import {getPosts} from '../../actions/index'
+import PostForm from '../postForm/PostForm'
+import { getPosts } from '../../actions/index'
 
 function Copyright() {
   return (
@@ -43,9 +44,9 @@ const useStyles = makeStyles(theme => ({
     backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://images.pexels.com/photos/17840/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940)',
     backgroundPosition: 'center',
     backgroundSize: 'cover',
-    backgroundAttachment: 'fixed',    
+    backgroundAttachment: 'fixed',
     padding: theme.spacing(8, 0, 6),
-    color:'#e8eaf6'
+    color: '#e8eaf6'
   },
   heroButtons: {
     marginTop: theme.spacing(4),
@@ -74,14 +75,24 @@ const useStyles = makeStyles(theme => ({
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
+
   const classes = useStyles();
   const dispatch = useDispatch()
-  const currentState = useSelector(state=>state.posts)
+  const currentState = useSelector(state => state.posts)
+  const [open, setOpen] = React.useState(false);
+  
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    useEffect(()=>{
-        dispatch(getPosts())
-    },[])
-    console.log(currentState)
+  const handleClose = value => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    dispatch(getPosts())
+  }, [])
+  console.log(currentState)
 
   return (
     <React.Fragment>
@@ -102,14 +113,15 @@ export default function Album() {
               Welcome Back!
             </Typography>
             <Typography variant="h5" align="center" color="#e8eaf6" paragraph>
-              Perfecting form is tapping your potential. <br/>Be a part of something BIGGER!
+              Perfecting form is tapping your potential. <br />Be a part of something BIGGER!
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button href={'/NewPost'} variant="contained" color="primary">
+                  <Button onClick={handleClickOpen} variant="contained" color="primary">
                     Start Here
                   </Button>
+                  <PostForm  open={open} onClose={handleClose}/>
                 </Grid>
                 <Grid item>
                   <Button variant="outlined" color="primary">
@@ -123,25 +135,25 @@ export default function Album() {
         <Container className={classes.cardGrid} maxWidth="lg">
           {/* End hero unit */}
           <Grid container spacing={4}>
-          {currentState.length?currentState.map((post, index)=> 
-            // {cards.map(card => (
+            {currentState.length ? currentState.map((post, index) =>
+              // {cards.map(card => (
               <Grid item key={post.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardActionArea>
-                      <Link href={`/post/${post.id}`}>
-                          <CardMedia
-                            className={classes.cardMedia}
-                            image={`https://img.youtube.com/vi/${(post.video_link.split('='))[1]}/sddefault.jpg`}
-                            title={post.exercises}
-                          />
-                      </Link>
+                    <Link href={`/post/${post.id}`}>
+                      <CardMedia
+                        className={classes.cardMedia}
+                        image={`https://img.youtube.com/vi/${(post.video_link.split('='))[1]}/sddefault.jpg`}
+                        title={post.exercises}
+                      />
+                    </Link>
                   </CardActionArea>
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
                       {post.title}
                     </Typography>
                     <Typography>
-                      {post.description.split('').splice(0,25).join('')+('...')}
+                      {post.description.split('').splice(0, 25).join('') + ('...')}
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -153,7 +165,7 @@ export default function Album() {
                   </CardActions>
                 </Card>
               </Grid>
-            ):<></>}
+            ) : <></>}
           </Grid>
         </Container>
       </main>
