@@ -64,6 +64,25 @@ export const GET_MESSAGE_START = 'GET_MESSAGE_START'
 export const GET_MESSAGE_SUCCESS = 'GET_MESSAGE_SUCCESS'
 export const GET_MESSAGE_FAIL = 'GET_MESSAGE_FAIL'
 
+//
+export const GET_CURRENT_USER_START = 'GET_CURRENT_USER_START'
+export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS'
+export const GET_CURRENT_USER_FAIL = 'GET_CURRENT_USER_FAIL'
+
+export const getCurrentUser = payload => dispatch =>{
+    dispatch({type:GET_CURRENT_USER_START})
+    axiosWithAuth()
+    .get('/user')
+    .then(res=>{
+        dispatch({type:GET_CURRENT_USER_SUCCESS, payload:res.data})
+        console.log('res',res)
+    })
+    .catch(err=>{
+        console.log(err)
+        dispatch({type:GET_CURRENT_USER_FAIL, payload:err})
+    })
+}
+
 export const postLoginUser = payload=>dispatch=>{
     dispatch({type:LOGIN_START})
     axios
@@ -141,5 +160,33 @@ export const postComment = payload => dispatch =>{
     .catch(err=>{
         console.log(err)
         dispatch({type:CREATE_COMMENT_FAIL, payload: err})
+    })
+}
+
+export const deleteComment = payload => dispatch=>{
+    console.log(payload)
+    const commentId = payload
+    dispatch({type:DELETE_COMMENT_START})
+    axiosWithAuth()
+    .delete(`/posts/comments/${commentId}`)
+    .then(res=>{
+        console.log('delete', res)
+        dispatch({type:DELETE_COMMENT_SUCCESS, payload:res.data})
+    })
+    .catch(err=>{
+        console.log(err)
+        dispatch({type:DELETE_COMMENT_FAIL, payload:err})
+    })
+}
+
+export const createPost = payload => dispatch =>{
+    console.log(payload)
+    dispatch({type:CREATE_POST_START})
+    axiosWithAuth()
+    .post('/posts', payload)
+    .then(res=>dispatch({type:CREATE_POST_SUCCESS, payload: res.data}))
+    .catch(err=>{
+        console.log(err)
+        dispatch({type:CREATE_POST_FAIL, type: err})
     })
 }

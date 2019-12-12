@@ -31,7 +31,13 @@ import{
     LOGIN_SUCCESS,
     REGISTER_START,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    GET_CURRENT_USER_START,
+    GET_CURRENT_USER_SUCCESS,
+    GET_CURRENT_USER_FAIL,
+    CREATE_POST_START,
+    CREATE_POST_SUCCESS,
+    CREATE_POST_FAIL
 } from '../actions/index'
 
 const initialState = {
@@ -42,6 +48,7 @@ const initialState = {
     registerError:'',
     postError:'',
     isLoading:false,
+    currentUser:{},
     user:{},
     posts:[],
     post:{comments:[]},
@@ -153,7 +160,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading:false,
                 post: {...state.post,
-                    'comments':[...action.payload]
+                    comments:[...action.payload]
                 }
             }
         }
@@ -175,8 +182,68 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading:false,
                 post: {...state.post,
-                    'comments':[...state.post.comments,action.payload]
+                    comments:[...state.post.comments,action.payload]
                 }
+            }
+        }
+        case GET_CURRENT_USER_START:{
+            return{
+                ...state,
+                isLoading:true
+            }
+        }
+        case GET_CURRENT_USER_FAIL:{
+            return{
+                ...state,
+                isLoading:false,
+                postError: action.payload
+            }
+        }
+        case GET_CURRENT_USER_SUCCESS:{
+            return{
+                ...state,
+                isLoading:false,
+                currentUser:{...action.payload}
+            }
+        }
+        case DELETE_COMMENT_START:{
+            return{
+                ...state,
+                isLoading:true
+            }
+        }
+        case DELETE_COMMENT_FAIL:{
+            return{
+                ...state,
+                isLoading:false,
+                postError: action.payload
+            }
+        }
+        case DELETE_COMMENT_SUCCESS:{ 
+            return{
+                ...state,
+                isLoading:false,
+                post:{...state.post, comments: state.post.comments.filter(comment=>comment.id!==action.payload.id)}
+            }
+        }
+        case CREATE_POST_START:{
+            return{
+                ...state,
+                isLoading:true
+            }
+        }
+        case CREATE_POST_FAIL:{
+            return{
+                ...state,
+                isLoading:false,
+                postError: action.payload
+            }
+        }
+        case CREATE_POST_SUCCESS:{ 
+            return{
+                ...state,
+                isLoading:false,
+                posts:[...state.posts, action.payload] 
             }
         }
         default:{
