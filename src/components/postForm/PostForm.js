@@ -63,6 +63,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignContent: 'center',
+    alignItems: 'center',
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
       // marginTop: theme.spacing(6),
       // marginBottom: theme.spacing(6),
@@ -86,7 +87,7 @@ const useStyles = makeStyles(theme => ({
   },
 
   field: {
-    width: '90%',
+    width: '100%',
     margin: '3% auto',
   },
   formControl: {
@@ -150,7 +151,7 @@ const PostForm = (props) => {
           </Typography>
         <form onSubmit={handleSubmit} noValidate>
           <TextField fullWidth label="Title"
-            className={`input ${errors.title && 'is-danger'}`}
+            className={classes.field}
             name='title'
             value={values.title || ''}
             onChange={handleChange}
@@ -164,10 +165,12 @@ const PostForm = (props) => {
                 <YouTubeIcon />
               </InputAdornment>
             ),
-          }} fullWidth label="Video" className={classes.field}
+          }}
+            fullWidth label="Video"
+            className={classes.field}
             name='video_link'
             value={values.video_link || ''}
-            onChange={(e) => changeHandler(e)}>
+            onChange={handleChange}>
           </TextField>
           {errors.video_link && (<Typography color='error' className="help is-danger">{errors.video_link}</Typography>)}
 
@@ -194,12 +197,13 @@ const PostForm = (props) => {
             id="outlined-multiline-static"
             label="Description"
             name='description'
-            value={postField.description}
-            onChange={(e) => changeHandler(e)}
+            value={values.description}
+            onChange={handleChange}
             multiline
             rows="6"
             helperText="Please explain in as much detail as possible what you feel when performing this exercise and any other relevant information"
           />
+          {errors.description && (<Typography color='error' className="help is-danger">{errors.description}</Typography>)}
           <Button className={classes.field} variant="contained" color="primary" type="submit">SUBMIT</Button>
         </form>
       </Paper>
