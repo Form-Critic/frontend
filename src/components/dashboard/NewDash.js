@@ -17,7 +17,7 @@ import Link from '@material-ui/core/Link';
 import { useDispatch, useSelector } from 'react-redux'
 
 import PostForm from '../postForm/PostForm'
-import { getPosts } from '../../actions/index'
+import { getPosts, getCurrentUser } from '../../actions/index'
 
 function Copyright() {
   return (
@@ -72,13 +72,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
 
   const classes = useStyles();
   const dispatch = useDispatch()
-  const currentState = useSelector(state => state.posts)
+  const currentState = useSelector(state => state)
   const [open, setOpen] = React.useState(false);
   
   const handleClickOpen = () => {
@@ -91,9 +90,10 @@ export default function Album() {
 
   useEffect(() => {
     dispatch(getPosts())
+    dispatch(getCurrentUser())
   }, [])
-  console.log(currentState)
 
+  console.log(currentState)
   return (
     <React.Fragment>
       <CssBaseline />
@@ -119,7 +119,7 @@ export default function Album() {
               <Grid container spacing={2} justify="center">
                 <Grid item>
                   <Button onClick={handleClickOpen} variant="contained" color="primary">
-                    Get Started
+                    Get Checked
                   </Button>
                   <PostForm  open={open} onClose={handleClose}/>
                 </Grid>
@@ -135,7 +135,7 @@ export default function Album() {
         <Container className={classes.cardGrid} maxWidth="lg">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {currentState.length ? currentState.map((post, index) =>
+            {currentState.posts.length ? currentState.posts.map((post) =>
               // {cards.map(card => (
               <Grid item key={post.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
@@ -157,11 +157,16 @@ export default function Album() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Link href={`/post/${post.id}`}>
-                      <Button size="small" color="primary">
-                        View
-                      </Button>
-                    </Link>
+                    <div style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
+                      <Link href={`/post/${post.id}`}>
+                        <Button size="small" color="primary">
+                          View
+                        </Button>
+                        </Link>
+                        {currentState.currentUser.id===post.user_id?<Button style={{color:'red'}}size="small" color="primary">
+                          Delete
+                        </Button>:<></>}
+                    </div>
                   </CardActions>
                 </Card>
               </Grid>
