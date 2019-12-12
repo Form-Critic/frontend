@@ -14,27 +14,13 @@ import InputLabel from '@material-ui/core/InputLabel'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import Button from '@material-ui/core/Button'
-import { Dialog, DialogTitle, DialogContent, DialogContentText } from '@material-ui/core'
+import { Dialog } from '@material-ui/core'
 
 import { useDispatch, useSelector } from 'react-redux'
 import exercises from './options'
 import { createPost } from '../../actions/index'
 import validate from './postValidator'
 import useForm from './useForm'
-
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-        </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -104,41 +90,19 @@ const PostForm = (props) => {
   const inputLabel = React.useRef(null);
 
   const dispatch = useDispatch()
-  const currentState = useSelector(state => state.posts)
-
-  const [postField, setPostField] = useState({
-    title: '',
-    description: '',
-    video_link: '',
-    exercise_id: 1
-  })
 
   const {
     values,
     errors,
     handleChange,
     handleSubmit,
-  } = useForm(login, validate);
-
-  function login() {
-    console.log('No errors, submit callback called!');
-  }
+  } = useForm(submitPost, validate);
 
   const handleClose = () => {
     onClose();
   };
 
-  const handleListItemClick = value => {
-    onClose(value);
-  };
-
-  const changeHandler = e => {
-    setPostField({
-      ...postField, [e.target.name]: e.target.value
-    })
-  }
-
-  const submitPost = completePost => {
+  function submitPost(completePost) {
     dispatch(createPost(completePost))
     handleClose()
   }
@@ -179,11 +143,13 @@ const PostForm = (props) => {
               Exercise
           </InputLabel>
             <Select
-              labelWidth='10'
+              name='exercise'
+              labelWidth={10}
+              value={values.description || 1}
               label='Exercise'
               native
-              placeholder=' '
-              onChange={(e) => setPostField({ ...postField, exercise_id: Number(e.target.value) })}
+              placeholder={null}
+              onChange={handleChange}
               inputProps={{
                 name: 'exercise_id',
                 id: 'outlined-age-native-simple',
