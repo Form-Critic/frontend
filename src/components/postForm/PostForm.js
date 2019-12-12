@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -19,6 +19,8 @@ import { Dialog, DialogTitle, DialogContent, DialogContentText } from '@material
 import { useDispatch, useSelector } from 'react-redux'
 import exercises from './options'
 import { createPost } from '../../actions/index'
+import validate from './postValidator'
+import useForm from './useForm'
 
 
 function Copyright() {
@@ -95,6 +97,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const PostForm = (props) => {
+
+  const { onClose, open } = props;
   const classes = useStyles();
   const inputLabel = React.useRef(null);
 
@@ -102,13 +106,22 @@ const PostForm = (props) => {
   const currentState = useSelector(state => state.posts)
 
   const [postField, setPostField] = useState({
-    title:'',
-    description:'',
-    video_link:'',
-    exercise_id:1
+    title: '',
+    description: '',
+    video_link: '',
+    exercise_id: 1
   })
 
-  const { onClose, open } = props;
+  const {
+    values,
+    errors,
+    handleChange,
+    handleSubmit,
+  } = useForm(login, validate);
+
+  function login() {
+    console.log('No errors, submit callback called!');
+  }
 
   const handleClose = () => {
     onClose();
@@ -118,16 +131,16 @@ const PostForm = (props) => {
     onClose(value);
   };
 
-const changeHandler = e =>{
-  setPostField({
-    ...postField, [e.target.name]: e.target.value
-  })
-}
+  const changeHandler = e => {
+    setPostField({
+      ...postField, [e.target.name]: e.target.value
+    })
+  }
 
-const submitPost = completePost =>{
+  const submitPost = completePost => {
     dispatch(createPost(completePost))
     handleClose()
-}
+  }
 
   return (
     <Dialog className={classes.root} aria-labelledby="simple-dialog-title" onClose={handleClose} open={open}>
@@ -135,44 +148,60 @@ const submitPost = completePost =>{
         <Typography component="h1" variant="h4" align="center">
           Create Post
           </Typography>
-        <TextField fullWidth label="Title" className={classes.field} name='title' value={postField.title} onChange={(e)=>changeHandler(e)}></TextField>
-        <TextField InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <YouTubeIcon />
-            </InputAdornment>
-          ),
-        }} fullWidth label="Video" className={classes.field} name='video_link' value={postField.video_link} onChange={(e)=>changeHandler(e)}></TextField>
-        <FormControl className={classes.field} >
-          <InputLabel ref={inputLabel}>
-            Exercise
-        </InputLabel>
-          <Select
-            labelWidth='10'
-            label='Exercise'
-            native
-            placeholder=' '
-            onChange={(e)=>setPostField({...postField,exercise_id:Number(e.target.value)})}
-            inputProps={{
-              name: 'exercise_id',
-              id: 'outlined-age-native-simple',
-            }}
-          >
-            {exercises.map(exercise => <option value={exercise.id}>{exercise.name}</option>)}
-          </Select>
-        </FormControl>
-        <TextField
-          className={classes.field}
-          id="outlined-multiline-static"
-          label="Description"
-          name='description'
-          value={postField.description}
-          onChange={(e)=>changeHandler(e)}
-          multiline
-          rows="6"
-          helperText="Please explain in as much detail as possible what you feel when performing this exercise and any other relevant information"
-        />
-        <Button onClick={()=>{submitPost(postField)}} className={classes.field} variant="contained" color="primary">SUBMIT</Button>
+        <form onSubmit={handleSubmit} noValidate>
+          <TextField fullWidth label="Title"
+            className={`input ${errors.title && 'is-danger'}`}
+            name='title'
+            value={values.title || ''}
+            onChange={handleChange}
+            required>
+          </TextField>
+          {errors.title && (<Typography color='error' className="help is-danger">{errors.title}</Typography>)}
+
+          <TextField InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <YouTubeIcon />
+              </InputAdornment>
+            ),
+          }} fullWidth label="Video" className={classes.field}
+            name='video_link'
+            value={values.video_link || ''}
+            onChange={(e) => changeHandler(e)}>
+          </TextField>
+          {errors.video_link && (<Typography color='error' className="help is-danger">{errors.video_link}</Typography>)}
+
+          <FormControl className={classes.field}>
+            <InputLabel ref={inputLabel}>
+              Exercise
+          </InputLabel>
+            <Select
+              labelWidth='10'
+              label='Exercise'
+              native
+              placeholder=' '
+              onChange={(e) => setPostField({ ...postField, exercise_id: Number(e.target.value) })}
+              inputProps={{
+                name: 'exercise_id',
+                id: 'outlined-age-native-simple',
+              }}
+            >
+              {exercises.map(exercise => <option value={exercise.id}>{exercise.name}</option>)}
+            </Select>
+          </FormControl>
+          <TextField
+            className={classes.field}
+            id="outlined-multiline-static"
+            label="Description"
+            name='description'
+            value={postField.description}
+            onChange={(e) => changeHandler(e)}
+            multiline
+            rows="6"
+            helperText="Please explain in as much detail as possible what you feel when performing this exercise and any other relevant information"
+          />
+          <Button className={classes.field} variant="contained" color="primary" type="submit">SUBMIT</Button>
+        </form>
       </Paper>
     </Dialog>
   );
