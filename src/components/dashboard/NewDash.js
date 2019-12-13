@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import PostForm from '../postForm/PostForm'
 import { getPosts, getCurrentUser } from '../../actions/index'
-import DeletePost from '../deletePost/DeletePost'
+import DeletePostSelect from '../deletePost/DeletePost'
 
 function Copyright() {
   return (
@@ -159,11 +159,11 @@ export default function Album() {
                   </CardContent>
 
                   <CardActions>
-                    <DeletePost
+                    <DeletePostSelect
                       currentUserId={currentState.currentUser.id}
                       postId={post.id}
                       userId={post.user_id}
-                    ></DeletePost>
+                    ></DeletePostSelect>
                   </CardActions>
 
                 </Card>

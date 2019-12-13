@@ -136,8 +136,7 @@ const PostForm = (props) => {
             value={values.video_link || ''}
             onChange={handleChange}>
           </TextField>
-          {errors.video_link && (<Typography color='error' className="help is-danger">{errors.video_link}</Typography>)}
-
+          {errors.video_link && (<Typography color='error' className="help is-danger">{errors.video_link}</Typography>)} 
           <FormControl className={classes.field}>
             <InputLabel ref={inputLabel}>
               Exercise
