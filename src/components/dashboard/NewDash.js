@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import PostForm from '../postForm/PostForm'
 import { getPosts, getCurrentUser } from '../../actions/index'
-import DeletePostSelect from '../deletePost/DeletePost'
+import DeletePostSelect from '../deletePost/DeletePostSelect'
 
 function Copyright() {
   return (

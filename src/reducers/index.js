@@ -246,6 +246,26 @@ export default (state = initialState, action) => {
                 posts:[...state.posts, action.payload] 
             }
         }
+        case DELETE_POST_START:{
+            return{
+                ...state,
+                isLoading:true
+            }
+        }
+        case DELETE_POST_FAIL:{
+            return{
+                ...state,
+                isLoading:false,
+                postError: action.payload
+            }
+        }
+        case DELETE_POST_SUCCESS:{ 
+            return{
+                ...state,
+                isLoading:false,
+                posts:state.posts.filter(post=>post.id!==action.payload.id)
+            }
+        }
         default:{
             return state
         }

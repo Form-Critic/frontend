@@ -195,7 +195,7 @@ export const deletePost = payload => dispatch =>{
     console.log(payload)
     dispatch({type:DELETE_POST_START})
     axiosWithAuth()
-    .delete('/post/:id', payload)
+    .delete(`/posts/${payload}`)
     .then(res=>dispatch({type:DELETE_POST_SUCCESS, payload:res.data}))
     .catch(err=>dispatch({type:DELETE_POST_FAIL, payload: err}))
 }
