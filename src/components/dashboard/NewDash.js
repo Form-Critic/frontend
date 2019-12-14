@@ -24,8 +24,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://uzias.now.sh/">
+     uzias.now.sh
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function Album() {
+export default function Dash() {
 
   const classes = useStyles();
   const dispatch = useDispatch()
@@ -125,7 +125,7 @@ export default function Album() {
                   <PostForm open={open} onClose={handleClose} />
                 </Grid>
                 <Grid item>
-                  <Button variant="outlined" color="primary">
+                  <Button variant="contained" color="primary">
                     My Posts
                   </Button>
                 </Grid>
