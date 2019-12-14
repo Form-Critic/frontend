@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -18,13 +18,14 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import PostForm from '../postForm/PostForm'
 import { getPosts, getCurrentUser } from '../../actions/index'
+import DeletePostSelect from '../deletePost/DeletePostSelect'
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://uzias.now.sh/">
+     uzias.now.sh
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -73,13 +74,13 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function Album() {
+export default function Dash() {
 
   const classes = useStyles();
   const dispatch = useDispatch()
   const currentState = useSelector(state => state)
-  const [open, setOpen] = React.useState(false);
-  
+  const [open, setOpen] = useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -121,13 +122,13 @@ export default function Album() {
                   <Button onClick={handleClickOpen} variant="contained" color="primary">
                     Get Checked
                   </Button>
-                  <PostForm  open={open} onClose={handleClose}/>
+                  <PostForm open={open} onClose={handleClose} />
                 </Grid>
-                {/* <Grid item>
-                  <Button variant="outlined" color="primary">
-                    Secondary action
+                <Grid item>
+                  <Button variant="contained" color="primary">
+                    My Posts
                   </Button>
-                </Grid> */}
+                </Grid>
               </Grid>
             </div>
           </Container>
@@ -156,18 +157,15 @@ export default function Album() {
                       {post.description.split('').splice(0, 25).join('') + ('...')}
                     </Typography>
                   </CardContent>
+
                   <CardActions>
-                    <div style={{display:'flex', justifyContent:'space-between', width:'100%'}}>
-                      <Link href={`/post/${post.id}`}>
-                        <Button size="small" color="primary">
-                          View
-                        </Button>
-                        </Link>
-                        {currentState.currentUser.id===post.user_id?<Button style={{color:'red'}}size="small" color="primary">
-                          Delete
-                        </Button>:<></>}
-                    </div>
+                    <DeletePostSelect
+                      currentUserId={currentState.currentUser.id}
+                      postId={post.id}
+                      userId={post.user_id}
+                    ></DeletePostSelect>
                   </CardActions>
+
                 </Card>
               </Grid>
             ) : <></>}

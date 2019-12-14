@@ -187,6 +187,15 @@ export const createPost = payload => dispatch =>{
     .then(res=>dispatch({type:CREATE_POST_SUCCESS, payload: res.data}))
     .catch(err=>{
         console.log(err)
-        dispatch({type:CREATE_POST_FAIL, type: err})
+        dispatch({type:CREATE_POST_FAIL, payload: err})
     })
+}
+
+export const deletePost = payload => dispatch =>{
+    console.log(payload)
+    dispatch({type:DELETE_POST_START})
+    axiosWithAuth()
+    .delete(`/posts/${payload}`)
+    .then(res=>dispatch({type:DELETE_POST_SUCCESS, payload:res.data}))
+    .catch(err=>dispatch({type:DELETE_POST_FAIL, payload: err}))
 }

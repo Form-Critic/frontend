@@ -4,7 +4,6 @@ import logo from './logo.svg';
 import { BrowserRouter as Router, Switch, Route, Redirect, Link } from "react-router-dom";
 import PrivateRoute from './utils/PrivateRoute'
 //components
-import Dashboard from './components/dashboard/Dashboard'
 import NewDash from './components/dashboard/NewDash'
 import NewSiginIn from './components/login/NewSignIn'
 import Post from './components/post/Post'
