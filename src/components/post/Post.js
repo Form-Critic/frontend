@@ -28,9 +28,14 @@ const useStyles = makeStyles(theme => ({
         alignContent: 'center',
         width: '90%'
     },
+    commentContainer:{
+        display:'flex',
+        justifyContent: 'center'
+    },
     comment: {
         display: 'none',
-        color: 'red'
+        color: 'red',
+        width: '100%'
     },
     description: {
         width: '50%',
@@ -78,6 +83,7 @@ const Post = (props) => {
                     <Typography variant="h6" color="inherit" noWrap> Album layout </Typography>
                 </Toolbar>
             </AppBar>
+            {/* <div><Typography style={{fontSize:'16px'}}variant='subtitle1'>{post.date}</Typography></div> */}
             <div className={classes.title}>
                 <Typography variant='h2'>{post.title}</Typography>
                 <div className={classes.subTitle}>
@@ -96,7 +102,7 @@ const Post = (props) => {
                 >
                 </iframe>
             </div>
-            <div>
+            <div className={classes.commentContainer}>
                 <Comments className={classes.comment} comments={post.comments} props={props}></Comments>
             </div>
         </div>
@@ -104,13 +110,3 @@ const Post = (props) => {
 };
 
 export default Post;
-
-{/* <div className={classes.description}>
-                    <Paper className={classes.title}>
-                        <Typography variant='h4'>{post.title}</Typography>
-                        {/* <CardMedia  component="img" style={{width:'12%'}} image={post.avatar} src={post.avatar}></CardMedia> */}
-//     <img src={post.avatar} style={{width:'54px', height:'100%'}}/>
-// </Paper>
-// <Typography>{post.description}</Typography> */}
-{/* </div> */ }
-//<iframe width="560" height="315" src="//www.youtube.com/embed/SHgQeBk7zIs" frameborder="0" allowfullscreen></iframe>

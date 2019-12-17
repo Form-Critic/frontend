@@ -20,7 +20,7 @@ const Comments = ({ comments, props}) => {
     },[])
 
     return (
-    <Comment.Group>
+    <Comment.Group style={{width:'80%', display:'flex', flexDirection:'column', margin:'2% auto'}}>
          <Header as='h3' dividing>
             Comments
         </Header>
@@ -30,6 +30,7 @@ const Comments = ({ comments, props}) => {
             name='comment'
             value={newComment.comment}
             onChange={(e)=>{changeHandler(e)}}
+            style={{minWidth:'80%'}}
             />
             <Button onClick={(e)=>{
                 e.preventDefault()
@@ -40,6 +41,5 @@ const Comments = ({ comments, props}) => {
     </Comment.Group>
     )
 }
-
 
 export default Comments
