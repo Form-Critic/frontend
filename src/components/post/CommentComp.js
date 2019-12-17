@@ -21,15 +21,15 @@ const CommentComp = ({comment, currentUserId}) => {
           <div style={{display:'flex', justifyContent:'space-between'}}>
             <Comment.Author style={{textAlign:'left'}}>{comment.username}</Comment.Author>
             {/* <Typography variant='caption'>{comment.username}</Typography> */}
-            <Comment.Metadata style={{color:'black'}}>
-              {new Date(comment.date).toLocaleString()}
-            </Comment.Metadata>
-          </div>
-          <div style={{ textAlign:'right'}}>
             {currentUserId===comment.user_id?<DeleteForeverIcon onClick={(e)=>{
                 e.preventDefault()
                 deleteThisComment(comment.id)
               }} style={{color:'red', cursor:'pointer', textAlign:'right'}}>delete</DeleteForeverIcon>:null}
+          </div>
+          <div style={{ textAlign:'left'}}>
+          <Comment.Metadata style={{color:'black', margin:'2px 0 2px 0'}}>
+              {new Date(comment.date).toLocaleString()}
+            </Comment.Metadata>
           </div>
           <Comment.Text>
             <p style={{textAlign:'left'}}>{comment.comment}</p>

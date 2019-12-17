@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
 import AppBar from '@material-ui/core/AppBar';
+import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
@@ -47,7 +48,8 @@ const useStyles = makeStyles(theme => ({
     },
 
     title: {
-        margin: '2% auto 0 auto'
+        margin: '2% auto 0 auto',
+        display:'flex'
     },
     subTitle: {
         display: 'flex',
@@ -65,12 +67,12 @@ const useStyles = makeStyles(theme => ({
 const Post = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch()
-    const post = useSelector(state => state.post)
+    const state = useSelector(state => state)
     useEffect(() => {
         dispatch(getPost(props.match))
         dispatch(getComments(props.match))
     }, [])
-    const embedLink = !(post.video_link === undefined) ? '//www.youtube.com/embed/' + post.video_link.split('=')[1] : "";
+    const embedLink = !(state.post.video_link === undefined) ? '//www.youtube.com/embed/' + state.post.video_link.split('=')[1] : "";
     function dateFormatter(datetime) {
         // let [date, time] = datetime.split(' ')
         if (datetime){
@@ -80,7 +82,7 @@ const Post = (props) => {
     }
 
 
-    return (post.comments === undefined) ? <h1>Loading</h1> : (
+    return (state.post.comments === undefined) ? <h1>Loading</h1> : (
         <div>
             <CssBaseline />
             <AppBar position="relative">
@@ -90,30 +92,33 @@ const Post = (props) => {
                 </Toolbar>
             </AppBar>
             {/* <div><Typography style={{fontSize:'16px'}}variant='subtitle1'>{post.date}</Typography></div> */}
-            <div className={classes.title}>
-                <Typography variant='h2'>{post.title}</Typography>
-                <div className={classes.subTitle}>
-                    <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(post.date)}</Typography>
-                    <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{post.username}</Typography>
+            <div style={{display:'flex', justifyContent:'flex-start', flexDirection:'column'}}>
+                <div className={classes.title}>
+                    <Typography variant='h2'>{state.post.title}</Typography>
+                    {!state.currentUser.id?null:state.post.user_id===state.currentUser.id?<EditIcon color='primary' style={{margin:'0 4px'}}></EditIcon>:null}
+                    {/* <div className={classes.subTitle}>
+                        <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(post.date)}</Typography>
+                        <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{post.username}</Typography>
+                    </div> */}
                 </div>
-            </div>
-            <div className={classes.root}>
-                <iframe
-                    title='video'
-                    width="560"
-                    height="315"
-                    src={embedLink}
-                    allowFullScreen
-                    frameBorder="0"
-                >
-                </iframe>
-                <div>
-                    <Typography variant='h4' style={{ margin: '1% auto 1% auto' }}>Description</Typography>
-                    <Typography style={{ fontSize: '16px', margin: '1% auto 1% auto', width: '70%' }} variant='body1'>{post.description}</Typography>
+                <div className={classes.root}>
+                    <iframe
+                        title='video'
+                        width="560"
+                        height="315"
+                        src={embedLink}
+                        allowFullScreen
+                        frameBorder="0"
+                    >
+                    </iframe>
+                    <div >
+                        <Typography variant='h4' style={{ margin: '1% 0 1% 0' }}>Description</Typography>
+                        <Typography style={{ fontSize: '16px', margin: '1% auto 1% auto', width: '70%' }} variant='body1'>{state.post.description}</Typography>
+                    </div>
                 </div>
-            </div>
-            <div className={classes.commentContainer}>
-                <Comments className={classes.comment} comments={post.comments} props={props}></Comments>
+                <div className={classes.commentContainer}>
+                    <Comments className={classes.comment} comments={state.post.comments} props={props}></Comments>
+                </div>
             </div>
         </div>
     );
