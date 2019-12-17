@@ -8,6 +8,7 @@ import NewDash from './components/dashboard/NewDash'
 import NewSiginIn from './components/login/NewSignIn'
 import Post from './components/post/Post'
 import PostForm from './components/postForm/PostForm'
+import EditPost from './components/editPage/EditPost'
 import NavBar from './components/navbar/NavBar'
 import './App.css';
 
@@ -19,8 +20,10 @@ function App(props) {
         </Link> */}
         <Route path='/register' component={NewSiginIn} props={props}/>
         <PrivateRoute path='/home' component={NewDash} props={props}/>
-        <PrivateRoute path='/post/:id' component={Post} props={props}/>
+        <PrivateRoute exact path='/post/:id' component={Post} props={props}/>
         <PrivateRoute path='/NewPost' component={PostForm} props={props}/>
+        <PrivateRoute exact path='/post/:id/edit' component={EditPost} props={props}/>
+
 
       </Router>
 

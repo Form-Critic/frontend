@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
 import AppBar from '@material-ui/core/AppBar';
+import Link from '@material-ui/core/Link';
 import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components'
@@ -95,7 +96,12 @@ const Post = (props) => {
             <div style={{display:'flex', justifyContent:'flex-start', flexDirection:'column'}}>
                 <div className={classes.title}>
                     <Typography variant='h2'>{state.post.title}</Typography>
-                    {!state.currentUser.id?null:state.post.user_id===state.currentUser.id?<EditIcon color='primary' style={{margin:'0 4px'}}></EditIcon>:null}
+                    {!state.currentUser.id?null:state.post.user_id===state.currentUser.id?
+                    <Link href={`/post/${state.post.id}/edit`}>
+                        <EditIcon color='primary' style={{margin:'0 4px'}}>
+                        </EditIcon>
+                    </Link>
+                    :null}
                     {/* <div className={classes.subTitle}>
                         <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(post.date)}</Typography>
                         <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{post.username}</Typography>
