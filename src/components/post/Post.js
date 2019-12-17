@@ -28,8 +28,8 @@ const useStyles = makeStyles(theme => ({
         alignContent: 'center',
         width: '90%'
     },
-    commentContainer:{
-        display:'flex',
+    commentContainer: {
+        display: 'flex',
         justifyContent: 'center'
     },
     comment: {
@@ -49,10 +49,10 @@ const useStyles = makeStyles(theme => ({
     title: {
         margin: '2% auto 0 auto'
     },
-    subTitle:{
-        display:'flex',
-        flexDirection:'column',
-        justifyContent:'space-between',
+    subTitle: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
         width: '30%',
         margin: '0 auto'
     },
@@ -71,7 +71,13 @@ const Post = (props) => {
         dispatch(getComments(props.match))
     }, [])
     const embedLink = !(post.video_link === undefined) ? '//www.youtube.com/embed/' + post.video_link.split('=')[1] : "";
-    const x = new Date()
+    function dateFormatter(datetime) {
+        // let [date, time] = datetime.split(' ')
+        if (datetime){
+            console.log(new Date(Date.parse(datetime)))
+            return (new Date(Date.parse(datetime)).toLocaleString()) 
+        }
+    }
 
 
     return (post.comments === undefined) ? <h1>Loading</h1> : (
@@ -87,8 +93,8 @@ const Post = (props) => {
             <div className={classes.title}>
                 <Typography variant='h2'>{post.title}</Typography>
                 <div className={classes.subTitle}>
-                    <Typography style={{fontSize:'16px'}}variant='subtitle1'>{post.date}</Typography>
-                    <Typography style={{fontSize:'16px'}}variant='subtitle1'>{post.username}</Typography>
+                    <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(post.date)}</Typography>
+                    <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{post.username}</Typography>
                 </div>
             </div>
             <div className={classes.root}>
@@ -101,6 +107,10 @@ const Post = (props) => {
                     frameBorder="0"
                 >
                 </iframe>
+                <div>
+                    <Typography variant='h4' style={{ margin: '1% auto 1% auto' }}>Description</Typography>
+                    <Typography style={{ fontSize: '16px', margin: '1% auto 1% auto', width: '70%' }} variant='body1'>{post.description}</Typography>
+                </div>
             </div>
             <div className={classes.commentContainer}>
                 <Comments className={classes.comment} comments={post.comments} props={props}></Comments>
