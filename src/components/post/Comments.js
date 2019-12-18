@@ -24,7 +24,7 @@ const Comments = ({ comments, props}) => {
          <Header as='h3' dividing>
             Comments
         </Header>
-        {comments.map(comment => <CommentComp key={comment.id} comment={comment} currentUserId={currentState.currentUser.id}/>)}
+        {comments.map(comment => <CommentComp key={comment.id} comment={comment} op={currentState.post.id===comment.user_id} currentUserId={currentState.currentUser.id}/>)}
         <Form reply>
             <Form.TextArea 
             name='comment'

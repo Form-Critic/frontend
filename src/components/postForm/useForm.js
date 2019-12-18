@@ -5,8 +5,8 @@ import { useState, useEffect } from 'react';
 const useForm = (callback, validate, edit) => {
 
     const [values, setValues] = useState({
-        description: edit.description || '',
-        title: edit.title || ''
+        description: edit? edit.description: '',
+        title: edit? edit.title: ''
 
     });
     const [errors, setErrors] = useState({});
