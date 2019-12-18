@@ -199,3 +199,11 @@ export const deletePost = payload => dispatch =>{
     .then(res=>dispatch({type:DELETE_POST_SUCCESS, payload:res.data}))
     .catch(err=>dispatch({type:DELETE_POST_FAIL, payload: err}))
 }
+
+export const editPost = payload => dispatch =>{
+    dispatch({type:UPDATE_POST_START})
+    axiosWithAuth()
+    .put(`/posts/${payload.id}`, payload.edit)
+    .then(res=>dispatch({type:UPDATE_POST_SUCCESS, payload: res.data}))
+    .catch(err=>dispatch({type:UPDATE_POST_FAIL, payload:err}))
+}

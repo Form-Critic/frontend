@@ -8,11 +8,11 @@ import Typography from '@material-ui/core/Typography';
 import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 import { useDispatch, useSelector } from 'react-redux'
-import { createPost } from '../../actions/index'
-import validate from '../postForm/postValidator'
+import { editPost } from '../../actions/index'
+import validate from './editValidator'
 import useForm from '../postForm/useForm'
 
-
+// this is me trying to do benchpress, just kidding it's Jeff. If you're having trouble performing this exercise, check this video out!
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -39,6 +39,7 @@ const useStyles = makeStyles(theme => ({
 )
 
 export default function EditPost(props) {
+    console.log('props ', props)
     const classes = useStyles();
     const { onClose, open, title, description } = props;
     const inputLabel = React.useRef(null);
@@ -51,12 +52,10 @@ export default function EditPost(props) {
         errors,
         handleChange,
         handleSubmit,
-    } = useForm(submitPost, validate);
+    } = useForm(submitPost, validate, {title, description});
 
-    values.title = title
-    values.description = description
-    function submitPost(completePost) {
-        dispatch(createPost(completePost))
+    function submitPost(editedPost) {
+        dispatch(editPost({editPost}))
         handleClose()
     }
 
@@ -73,7 +72,8 @@ export default function EditPost(props) {
                     <TextField fullWidth label="Title"
                         className={classes.field}
                         name='title'
-                        value={values.title || title}
+                        placeholder={title}
+                        value={values.title || ''}
                         onChange={handleChange}
                         required>
                     </TextField>
@@ -83,7 +83,7 @@ export default function EditPost(props) {
                         id="outlined-multiline-static"
                         label="Description"
                         name='description'
-                        value={values.description || description}
+                        value={values.description || ''}
                         onChange={handleChange}
                         multiline
                         rows="6"
