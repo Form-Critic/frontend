@@ -8,6 +8,9 @@ import{
     GET_POST_START,
     GET_POST_SUCCESS,
     GET_POST_FAIL,
+    UPDATE_POST_START,
+    UPDATE_POST_SUCCESS,
+    UPDATE_POST_FAIL,
     CREATE_COMMENT_START,
     CREATE_COMMENT_SUCCESS,
     CREATE_COMMENT_FAIL,
@@ -264,6 +267,26 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading:false,
                 posts:state.posts.filter(post=>post.id!==action.payload.id)
+            }
+        }
+        case UPDATE_POST_START:{
+            return{
+                ...state,
+                isLoading:true
+            }
+        }
+        case UPDATE_POST_FAIL:{
+            return{
+                ...state,
+                isLoading:false,
+                postError: action.payload
+            }
+        }
+        case UPDATE_POST_SUCCESS:{ 
+            return{
+                ...state,
+                isLoading:false,
+                post:{...state.post,...action.payload}
             }
         }
         default:{

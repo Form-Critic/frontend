@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
@@ -9,11 +9,14 @@ import CameraIcon from '@material-ui/icons/PhotoCamera';
 import AppBar from '@material-ui/core/AppBar';
 import Link from '@material-ui/core/Link';
 import EditIcon from '@material-ui/icons/Edit';
+import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPost, getComments, getCurrentUser } from '../../actions/index'
 import Comments from './Comments'
+
+import EditPost from '../editPage/EditPost'
 
 const useStyles = makeStyles(theme => ({
 
@@ -50,7 +53,7 @@ const useStyles = makeStyles(theme => ({
 
     title: {
         margin: '2% auto 0 auto',
-        display:'flex'
+        display: 'flex'
     },
     subTitle: {
         display: 'flex',
@@ -69,6 +72,17 @@ const Post = (props) => {
     const classes = useStyles();
     const dispatch = useDispatch()
     const state = useSelector(state => state)
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = value => {
+        setOpen(false);
+    };
+
     useEffect(() => {
         dispatch(getPost(props.match))
         dispatch(getComments(props.match))
@@ -76,9 +90,9 @@ const Post = (props) => {
     const embedLink = !(state.post.video_link === undefined) ? '//www.youtube.com/embed/' + state.post.video_link.split('=')[1] : "";
     function dateFormatter(datetime) {
         // let [date, time] = datetime.split(' ')
-        if (datetime){
+        if (datetime) {
             console.log(new Date(Date.parse(datetime)))
-            return (new Date(Date.parse(datetime)).toLocaleString()) 
+            return (new Date(Date.parse(datetime)).toLocaleString())
         }
     }
 
@@ -93,15 +107,18 @@ const Post = (props) => {
                 </Toolbar>
             </AppBar>
             {/* <div><Typography style={{fontSize:'16px'}}variant='subtitle1'>{post.date}</Typography></div> */}
-            <div style={{display:'flex', justifyContent:'flex-start', flexDirection:'column'}}>
+            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column' }}>
                 <div className={classes.title}>
                     <Typography variant='h2'>{state.post.title}</Typography>
-                    {!state.currentUser.id?null:state.post.user_id===state.currentUser.id?
-                    <Link href={`/post/${state.post.id}/edit`}>
-                        <EditIcon color='primary' style={{margin:'0 4px'}}>
-                        </EditIcon>
-                    </Link>
-                    :null}
+                    {!state.currentUser.id ? null : state.post.user_id === state.currentUser.id ?
+                        // <Link href={`/post/${state.post.id}/edit`}>
+                        <>
+                            <EditIcon onClick={handleClickOpen} fontSize='large' color='primary' style={{ margin: '0 4px', cursor:'pointer' }}>
+                            </EditIcon>
+                            <EditPost open={open} onClose={handleClose} title={state.post.title} id={state.post.id} description={state.post.description} />
+                        </>
+                        // </Link>
+                        : null}
                     {/* <div className={classes.subTitle}>
                         <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(post.date)}</Typography>
                         <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{post.username}</Typography>

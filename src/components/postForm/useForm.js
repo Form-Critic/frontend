@@ -1,9 +1,14 @@
 // const useForm = (callback, validate) => {
 import { useState, useEffect } from 'react';
+// import { edit } from 'external-editor';
 
-const useForm = (callback, validate) => {
+const useForm = (callback, validate, edit) => {
 
-    const [values, setValues] = useState({});
+    const [values, setValues] = useState({
+        description: edit? edit.description: '',
+        title: edit? edit.title: ''
+
+    });
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
