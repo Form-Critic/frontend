@@ -286,7 +286,7 @@ export default (state = initialState, action) => {
             return{
                 ...state,
                 isLoading:false,
-                post:{...action.payload}
+                post:{...state.post,...action.payload}
             }
         }
         default:{

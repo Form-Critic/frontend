@@ -115,7 +115,7 @@ const Post = (props) => {
                         <>
                             <EditIcon onClick={handleClickOpen} fontSize='large' color='primary' style={{ margin: '0 4px', cursor:'pointer' }}>
                             </EditIcon>
-                            <EditPost open={open} onClose={handleClose} title={state.post.title} description={state.post.description} />
+                            <EditPost open={open} onClose={handleClose} title={state.post.title} id={state.post.id} description={state.post.description} />
                         </>
                         // </Link>
                         : null}
