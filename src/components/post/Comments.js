@@ -20,11 +20,10 @@ const Comments = ({ comments, props}) => {
     },[])
 
     return (
-    <Comment.Group style={{width:'80%', display:'flex', flexDirection:'column', margin:'2% auto'}}>
+    <Comment.Group style={{width:'90%', display:'flex', flexDirection:'column', margin:'2% auto'}}>
          <Header as='h3' dividing>
             Comments
         </Header>
-        {comments.map(comment => <CommentComp key={comment.id} comment={comment} op={currentState.post.id===comment.user_id} currentUserId={currentState.currentUser.id}/>)}
         <Form reply>
             <Form.TextArea 
             name='comment'
@@ -36,8 +35,9 @@ const Comments = ({ comments, props}) => {
                 e.preventDefault()
                 dispatch(postComment({newComment, id:Number(props.match.params.id)}))
                 setNewComment({comment:''})
-            }} content='Add Comment' labelPosition='left' icon='edit' primary />
+            }} content='Post Comment' labelPosition='left' icon='edit' primary />
         </Form>
+        {comments.map(comment => <CommentComp key={comment.id} comment={comment} op={currentState.post.id===comment.user_id} currentUserId={currentState.currentUser.id}/>)}
     </Comment.Group>
     )
 }

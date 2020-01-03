@@ -53,8 +53,8 @@ const useStyles = makeStyles(theme => ({
     },
 
     title: {
-        margin: '2% auto 0 auto',
-        display: 'flex'
+            margin: '2% auto 0 auto',
+            display: 'flex'
     },
     subTitle: {
         display: 'flex',
@@ -63,6 +63,18 @@ const useStyles = makeStyles(theme => ({
         width: '30%',
         margin: '0 auto'
     },
+    text: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignContent: 'center',
+        alignItems: 'center'
+    },
+    textDescription:{
+        textAlign:'none',
+        width: '80%',
+        margin: '0 auto'
+    }
 })
 )
 
@@ -104,13 +116,30 @@ const Post = (props) => {
             <AppBar position="relative">
                 <Toolbar>
                     <CameraIcon className={classes.icon} />
-                    <Typography variant="h6" color="inherit" noWrap> Album layout </Typography>
+                    <Typography variant="h6" color="inherit" noWrap> Form Critic </Typography>
                 </Toolbar>
             </AppBar>
             {/* <div><Typography style={{fontSize:'16px'}}variant='subtitle1'>{post.date}</Typography></div> */}
-            <div style={{display:'flex'}}>
+            <div className={classes.root} style={{display:'flex'}}>
                 <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column' }}>
-                    <div className={classes.title}>
+                    <div>
+                        <iframe
+                            className=  'video'
+                            title='video'
+                            width="560"
+                            height="315"
+                            src={embedLink}
+                            allowFullScreen
+                            frameBorder="0"
+                        >
+                        </iframe>
+                    </div>
+                    <div className={classes.commentContainer}>
+                        <Comments className={classes.comment} comments={state.post.comments} props={props}></Comments>
+                    </div>
+                </div>
+                <div className={classes.text}>
+                <div>
                         <Typography variant='h2'>{state.post.title}</Typography>
                         {!state.currentUser.id ? null : state.post.user_id === state.currentUser.id ?
                             // <Link href={`/post/${state.post.id}/edit`}>
@@ -121,33 +150,15 @@ const Post = (props) => {
                             </>
                             // </Link>
                             : null}
-                        {/* <div className={classes.subTitle}>
-                            <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(post.date)}</Typography>
-                            <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{post.username}</Typography>
-                        </div> */}
-                    </div>
-                    <div className={classes.root}>
-                        <iframe
-                            className='video'
-                            title='video'
-                            width="560"
-                            height="315"
-                            src={embedLink}
-                            allowFullScreen
-                            frameBorder="0"
-                        >
-                        </iframe>
-                        <div >
-                                {/* <Typography variant='h4' style={{ margin: '1% 0 1% 0' }}>Description</Typography> */}
-                                <Typography style={{ fontSize: '16px', margin: '1% auto 1% auto', width: '70%' }} variant='body1'>{state.post.description}</Typography>
+                        <div className={classes.subTitle}>
+                            {/* <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(state.post.date)}</Typography>
+                            <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{state.post.username}</Typography> */}
                         </div>
                     </div>
-                    <div className={classes.commentContainer}>
-                        <Comments className={classes.comment} comments={state.post.comments} props={props}></Comments>
-                    </div>
-                </div>
-                <div>
-                    <p>Profile</p>
+                    <div >
+                                {/* <Typography variant='h4' style={{ margin: '1% 0 1% 0' }}>Description</Typography> */}
+                                <Typography className={classes.textDescription} style={{ fontSize: '16px', textAlign:'left' }} variant='body1'>{state.post.description}</Typography>
+                        </div>
                 </div>
             </div>
             <Footer/>
