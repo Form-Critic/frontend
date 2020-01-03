@@ -19,19 +19,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import PostForm from '../postForm/PostForm'
 import { getPosts, getCurrentUser } from '../../actions/index'
 import DeletePostSelect from '../deletePost/DeletePostSelect'
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://uzias.now.sh/">
-     uzias.now.sh
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Footer from '../general/Copyright'
 
 
 //notes delete PostGrid and Post if they are not in use!
@@ -173,15 +161,7 @@ export default function Dash() {
         </Container>
       </main>
       {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
-        </Typography>
-        <Copyright />
-      </footer>
+      <Footer/>
       {/* End footer */}
     </React.Fragment>
   );

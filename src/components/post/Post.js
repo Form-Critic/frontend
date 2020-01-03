@@ -15,6 +15,7 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPost, getComments, getCurrentUser } from '../../actions/index'
 import Comments from './Comments'
+import Footer from '../general/Copyright'
 
 import EditPost from '../editPage/EditPost'
 
@@ -107,42 +108,49 @@ const Post = (props) => {
                 </Toolbar>
             </AppBar>
             {/* <div><Typography style={{fontSize:'16px'}}variant='subtitle1'>{post.date}</Typography></div> */}
-            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column' }}>
-                <div className={classes.title}>
-                    <Typography variant='h2'>{state.post.title}</Typography>
-                    {!state.currentUser.id ? null : state.post.user_id === state.currentUser.id ?
-                        // <Link href={`/post/${state.post.id}/edit`}>
-                        <>
-                            <EditIcon onClick={handleClickOpen} fontSize='large' color='primary' style={{ margin: '0 4px', cursor:'pointer' }}>
-                            </EditIcon>
-                            <EditPost open={open} onClose={handleClose} title={state.post.title} id={state.post.id} description={state.post.description} />
-                        </>
-                        // </Link>
-                        : null}
-                    {/* <div className={classes.subTitle}>
-                        <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(post.date)}</Typography>
-                        <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{post.username}</Typography>
-                    </div> */}
-                </div>
-                <div className={classes.root}>
-                    <iframe
-                        title='video'
-                        width="560"
-                        height="315"
-                        src={embedLink}
-                        allowFullScreen
-                        frameBorder="0"
-                    >
-                    </iframe>
-                    <div >
-                        <Typography variant='h4' style={{ margin: '1% 0 1% 0' }}>Description</Typography>
-                        <Typography style={{ fontSize: '16px', margin: '1% auto 1% auto', width: '70%' }} variant='body1'>{state.post.description}</Typography>
+            <div style={{display:'flex'}}>
+                <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column' }}>
+                    <div className={classes.title}>
+                        <Typography variant='h2'>{state.post.title}</Typography>
+                        {!state.currentUser.id ? null : state.post.user_id === state.currentUser.id ?
+                            // <Link href={`/post/${state.post.id}/edit`}>
+                            <>
+                                <EditIcon onClick={handleClickOpen} fontSize='large' color='primary' style={{ margin: '0 4px', cursor:'pointer' }}>
+                                </EditIcon>
+                                <EditPost open={open} onClose={handleClose} title={state.post.title} id={state.post.id} description={state.post.description} />
+                            </>
+                            // </Link>
+                            : null}
+                        {/* <div className={classes.subTitle}>
+                            <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(post.date)}</Typography>
+                            <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{post.username}</Typography>
+                        </div> */}
+                    </div>
+                    <div className={classes.root}>
+                        <iframe
+                            className='video'
+                            title='video'
+                            width="560"
+                            height="315"
+                            src={embedLink}
+                            allowFullScreen
+                            frameBorder="0"
+                        >
+                        </iframe>
+                        <div >
+                                {/* <Typography variant='h4' style={{ margin: '1% 0 1% 0' }}>Description</Typography> */}
+                                <Typography style={{ fontSize: '16px', margin: '1% auto 1% auto', width: '70%' }} variant='body1'>{state.post.description}</Typography>
+                        </div>
+                    </div>
+                    <div className={classes.commentContainer}>
+                        <Comments className={classes.comment} comments={state.post.comments} props={props}></Comments>
                     </div>
                 </div>
-                <div className={classes.commentContainer}>
-                    <Comments className={classes.comment} comments={state.post.comments} props={props}></Comments>
+                <div>
+                    <p>Profile</p>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 };
