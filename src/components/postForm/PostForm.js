@@ -142,7 +142,7 @@ const PostForm = (props) => {
             <Select
               name='exercise'
               labelWidth={10}
-              value={values.description || 1}
+              value={values.exercise_id || 1}
               label='Exercise'
               native
               placeholder={null}
