@@ -29,7 +29,7 @@ const Comments = ({ comments, props}) => {
             name='comment'
             value={newComment.comment}
             onChange={(e)=>{changeHandler(e)}}
-            style={{minWidth:'80%'}}
+            style={{width:'90%'}}
             />
             <Button onClick={(e)=>{
                 e.preventDefault()
