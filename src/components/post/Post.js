@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CardMedia from '@material-ui/core/CardMedia';
+import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,14 +16,18 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPost, getComments, getCurrentUser } from '../../actions/index'
 import Comments from './Comments'
+import Footer from '../general/Copyright'
 
 import EditPost from '../editPage/EditPost'
 
 const useStyles = makeStyles(theme => ({
 
     root: {
-        margin: '2% auto',
-        width: '80%',
+        margin: '5% auto',
+        width: '90%',
+        display:'flex',
+        flexDirection:'column',
+        justifyContent:'flex-start'
     },
     content: {
         margin: '5% auto',
@@ -35,7 +40,9 @@ const useStyles = makeStyles(theme => ({
     },
     commentContainer: {
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width:'80%',
+        margin: '4% auto 0 auto'
     },
     comment: {
         display: 'none',
@@ -55,13 +62,38 @@ const useStyles = makeStyles(theme => ({
         margin: '2% auto 0 auto',
         display: 'flex'
     },
-    subTitle: {
+    subtitle: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        width: '100%',
+        margin: '1% auto',
+        alignItems: 'center',
+        alignContent: 'center',
+        padding: '2% 1%',
+        borderTop: '.25px #dadada solid',
+        borderBottom: '.25px #dadada solid'
+
+    },
+    text: {
+        width:'90%',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        width: '30%',
-        margin: '0 auto'
+        justifyContent: 'flex-start',
+        alignContent: 'center',
+        margin: '0 4%'
     },
+    textDescription: {
+        textAlign: 'left',
+        margin: '0 2%',
+        fontWeight: 200,
+        fontSize: '14px',
+        textAlign: 'left',
+    },
+    postInfo:{ 
+        display: 'flex', 
+        justifyContent: 'flex-start', 
+        alignItems: 'center'
+    }
 })
 )
 
@@ -92,7 +124,7 @@ const Post = (props) => {
         // let [date, time] = datetime.split(' ')
         if (datetime) {
             console.log(new Date(Date.parse(datetime)))
-            return (new Date(Date.parse(datetime)).toLocaleString())
+            return (new Date(Date.parse(datetime)).toLocaleString().split(',')[0])
         }
     }
 
@@ -103,48 +135,55 @@ const Post = (props) => {
             <AppBar position="relative">
                 <Toolbar>
                     <CameraIcon className={classes.icon} />
-                    <Typography variant="h6" color="inherit" noWrap> Album layout </Typography>
+                    <Typography variant="h6" color="inherit" noWrap> Form Critic </Typography>
                 </Toolbar>
             </AppBar>
             {/* <div><Typography style={{fontSize:'16px'}}variant='subtitle1'>{post.date}</Typography></div> */}
-            <div style={{ display: 'flex', justifyContent: 'flex-start', flexDirection: 'column' }}>
-                <div className={classes.title}>
-                    <Typography variant='h2'>{state.post.title}</Typography>
-                    {!state.currentUser.id ? null : state.post.user_id === state.currentUser.id ?
-                        // <Link href={`/post/${state.post.id}/edit`}>
-                        <>
-                            <EditIcon onClick={handleClickOpen} fontSize='large' color='primary' style={{ margin: '0 4px', cursor:'pointer' }}>
-                            </EditIcon>
-                            <EditPost open={open} onClose={handleClose} title={state.post.title} id={state.post.id} description={state.post.description} />
-                        </>
-                        // </Link>
-                        : null}
-                    {/* <div className={classes.subTitle}>
-                        <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(post.date)}</Typography>
-                        <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{post.username}</Typography>
-                    </div> */}
-                </div>
-                <div className={classes.root}>
-                    <iframe
-                        title='video'
-                        width="560"
-                        height="315"
-                        src={embedLink}
-                        allowFullScreen
-                        frameBorder="0"
-                    >
-                    </iframe>
-                    <div >
-                        <Typography variant='h4' style={{ margin: '1% 0 1% 0' }}>Description</Typography>
-                        <Typography style={{ fontSize: '16px', margin: '1% auto 1% auto', width: '70%' }} variant='body1'>{state.post.description}</Typography>
+            <div className={classes.root}>
+                <div className={classes.postInfo}>
+                    <div>
+                        <iframe
+                            className='video'
+                            title='video'
+                            width="480"
+                            height="270"
+                            src={embedLink}
+                            allowFullScreen
+                            frameBorder="0"
+                        >
+                        </iframe>
+                    </div>
+                    <div className={classes.text}>
+                        <div style={{ display: 'flex', margin: '0 auto' }}>
+                            <Typography style={{ marginBottom: '3%', fontSize: '22px' }} variant='h2'>{state.post.title}</Typography>
+                            {!state.currentUser.id ? null : state.post.user_id === state.currentUser.id ?
+                                <>
+                                    <EditIcon onClick={handleClickOpen} fontSize='medium' color='primary' style={{ margin: '0 4px', cursor: 'pointer' }}>
+                                    </EditIcon>
+                                    <EditPost open={open} onClose={handleClose} title={state.post.title} id={state.post.id} description={state.post.description} />
+                                </>
+                                : null}
+                        </div>
+                        <div className={classes.subtitle}>
+                            <Avatar src={state.post.avatar}></Avatar>
+                            <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{state.post.username}</Typography>
+                            <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(state.post.date)}</Typography>
+                        </div>
+
+                        <div >
+                            {/* <Typography variant='h4' style={{ margin: '1% 0 1% 0' }}>Description</Typography> */}
+                            <Typography className={classes.textDescription} variant='body1'>{state.post.description}</Typography>
+                        </div>
                     </div>
                 </div>
                 <div className={classes.commentContainer}>
                     <Comments className={classes.comment} comments={state.post.comments} props={props}></Comments>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };
+
 
 export default Post;
