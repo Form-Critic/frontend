@@ -5,6 +5,9 @@ import{
     GET_POSTS_START,
     GET_POSTS_SUCCESS,
     GET_POSTS_FAIL,
+    GET_MYPOSTS_START,
+    GET_MYPOSTS_SUCCESS,
+    GET_MYPOSTS_FAIL,
     GET_POST_START,
     GET_POST_SUCCESS,
     GET_POST_FAIL,
@@ -119,6 +122,26 @@ export default (state = initialState, action) => {
             }
         }
         case GET_POSTS_SUCCESS:{
+            return{
+                ...state,
+                isLoading:false,
+                posts: [...action.payload]
+            }
+        }
+        case GET_MYPOSTS_START:{
+            return{
+                ...state,
+                isLoading:true
+            }
+        }
+        case GET_MYPOSTS_FAIL:{
+            return{
+                ...state,
+                isLoading:false,
+                postError: action.payload
+            }
+        }
+        case GET_MYPOSTS_SUCCESS:{
             return{
                 ...state,
                 isLoading:false,

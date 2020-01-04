@@ -17,7 +17,7 @@ import Link from '@material-ui/core/Link';
 import { useDispatch, useSelector } from 'react-redux'
 
 import PostForm from '../postForm/PostForm'
-import { getPosts, getCurrentUser } from '../../actions/index'
+import { getPosts, getCurrentUser, getMyPosts } from '../../actions/index'
 import DeletePostSelect from '../deletePost/DeletePostSelect'
 import Footer from '../general/Copyright'
 
@@ -68,6 +68,7 @@ export default function Dash() {
   const dispatch = useDispatch()
   const currentState = useSelector(state => state)
   const [open, setOpen] = useState(false);
+  const [myPosts, setMyPosts] = useState(false)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -81,7 +82,9 @@ export default function Dash() {
     dispatch(getPosts())
     dispatch(getCurrentUser())
   }, [])
-
+  const fetchPosts = (userId) =>{
+    myPosts?dispatch(getPosts()): dispatch(getMyPosts(userId))
+  }
   console.log(currentState)
   return (
     <React.Fragment>
@@ -113,8 +116,11 @@ export default function Dash() {
                   <PostForm open={open} onClose={handleClose} />
                 </Grid>
                 <Grid item>
-                  <Button variant="contained" color="primary">
-                    My Posts
+                  <Button onClick={()=>{
+                    fetchPosts(currentState.currentUser.id)
+                    setMyPosts(!myPosts)
+                  }} variant="contained" color="primary">
+                    {myPosts? 'All Posts':'My Posts'}
                   </Button>
                 </Grid>
               </Grid>

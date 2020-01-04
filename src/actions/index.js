@@ -31,6 +31,10 @@ export const GET_POSTS_START = 'GET_POSTS_START'
 export const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS'
 export const GET_POSTS_FAIL = 'GET_POSTS_FAIL'
 
+export const GET_MYPOSTS_START = 'GET_MYPOSTS_START'
+export const GET_MYPOSTS_SUCCESS = 'GET_MYPOSTS_SUCCESS'
+export const GET_MYPOSTS_FAIL = 'GET_MYPOSTS_FAIL'
+
 export const GET_POST_START = 'GET_POST_START'
 export const GET_POST_SUCCESS = 'GET_POST_SUCCESS'
 export const GET_POST_FAIL = 'GET_POST_FAIL'
@@ -119,6 +123,19 @@ export const getPosts = payload => dispatch =>{
     .catch(err=>{
         console.log(err)
         dispatch({type:GET_POSTS_FAIL, payload: err})
+    })
+}
+
+export const getMyPosts = payload => dispatch =>{
+    dispatch({type:GET_MYPOSTS_START})
+    axiosWithAuth()
+    .get(`/posts/${payload}/all`)
+    .then(res=>{
+        dispatch( {type:GET_MYPOSTS_SUCCESS, payload:res.data})
+    })
+    .catch(err=>{
+        console.log(err)
+        dispatch({type:GET_MYPOSTS_FAIL, payload: err})
     })
 }
 
