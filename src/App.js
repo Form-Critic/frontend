@@ -18,6 +18,7 @@ function App(props) {
       <Router>
         {/* <Link path='/register' component={Register}>Register
         </Link> */}
+        <Route render={() => <Redirect to={{pathname: "/home"}} />} />
         <Route path='/register' component={NewSiginIn} props={props}/>
         <PrivateRoute path='/home' component={NewDash} props={props}/>
         <PrivateRoute exact path='/post/:id' component={Post} props={props}/>

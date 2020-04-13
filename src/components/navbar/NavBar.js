@@ -1,6 +1,6 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar'
-import ToolBar from '@material-ui/core/ToolBar'
+import { Toolbar } from '@material-ui/core'
 import Typography from '@material-ui/core/Typography'
 
 
@@ -8,11 +8,11 @@ const NavBar = () => {
     return (
         <div>
             <AppBar position='static'>
-                <ToolBar>
+                <Toolbar>
                     <Typography variant='title' color='inherit'>
                         The Form Critic
                     </Typography>
-                </ToolBar>
+                </Toolbar>
             </AppBar>
         </div>
     );

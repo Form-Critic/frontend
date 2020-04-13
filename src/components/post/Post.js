@@ -80,14 +80,14 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignContent: 'center',
-        margin: '0 4%'
+        margin: '0 4%',
     },
     textDescription: {
         textAlign: 'left',
         margin: '0 2%',
-        fontWeight: 200,
         fontSize: '14px',
         textAlign: 'left',
+        color:'black'
     },
     postInfo:{ 
         display: 'flex', 
@@ -172,7 +172,7 @@ const Post = (props) => {
 
                         <div >
                             {/* <Typography variant='h4' style={{ margin: '1% 0 1% 0' }}>Description</Typography> */}
-                            <Typography className={classes.textDescription} variant='body1'>{state.post.description}</Typography>
+                            <Typography className={classes.textDescription} variant='h4'>{state.post.description}</Typography>
                         </div>
                     </div>
                 </div>
