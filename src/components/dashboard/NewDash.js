@@ -15,6 +15,7 @@ import Container from '@material-ui/core/Container';
 import CardActionArea from '@material-ui/core/CardActionArea'
 import Link from '@material-ui/core/Link';
 import { useDispatch, useSelector } from 'react-redux'
+import NavBar from '../navbar/NavBar'
 
 import PostForm from '../postForm/PostForm'
 import { getPosts, getCurrentUser, getMyPosts } from '../../actions/index'
@@ -89,14 +90,7 @@ export default function Dash() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <CameraIcon className={classes.icon} />
-          <Typography variant="h6" color="inherit" noWrap>
-            Album layout
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <NavBar/>
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>

@@ -11,21 +11,23 @@ import PostForm from './components/postForm/PostForm'
 import EditPost from './components/editPage/EditPost'
 import NavBar from './components/navbar/NavBar'
 import './App.css';
+import { useSelector } from 'react-redux'
+
 
 function App(props) {
+  const loggedIn = useSelector(state => state.isLoggedIn)
+  console.log("this is logged in", loggedIn)
   return (
     <div className="App">
       <Router>
-        {/* <Link path='/register' component={Register}>Register
-        </Link> */}
-        <Route render={() => <Redirect to={{pathname: "/home"}} />} />
-        <Route path='/register' component={NewSiginIn} props={props}/>
-        <PrivateRoute path='/home' component={NewDash} props={props}/>
-        <PrivateRoute exact path='/post/:id' component={Post} props={props}/>
-        <PrivateRoute path='/NewPost' component={PostForm} props={props}/>
-        <PrivateRoute exact path='/post/:id/edit' component={EditPost} props={props}/>
-
-
+        <Switch>
+          <Route path='/register' component={loggedIn? NewDash : NewSiginIn} props={props}/>
+          <Route path='/home' component={NewDash} props={props}/>
+          <PrivateRoute exact path='/post/:id' component={Post} props={props}/>
+          {/* <PrivateRoute path='/NewPost' component={PostForm} props={props}/> */}
+          <PrivateRoute exact path='/post/:id/edit' component={EditPost} props={props}/>
+          <Route exact={true} component={NewDash}/>
+        </Switch>
       </Router>
 
      

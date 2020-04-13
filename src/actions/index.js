@@ -95,7 +95,7 @@ export const postLoginUser = payload=>dispatch=>{
         dispatch({type:LOGIN_SUCCESS, payload:res.data})
         console.log('token', res.data.token)
         localStorage.setItem('token', res.data.token)
-        payload.props.history.push('/dash')
+        payload.props.history.push('/home')
     })
     .catch(err => dispatch({ type: LOGIN_FAIL, payload: err }))
 }
@@ -223,4 +223,9 @@ export const editPost = payload => dispatch =>{
     .put(`/posts/${payload.id}`, payload.edit)
     .then(res=>dispatch({type:UPDATE_POST_SUCCESS, payload: res.data}))
     .catch(err=>dispatch({type:UPDATE_POST_FAIL, payload:err}))
+}
+
+export const logOut = payload => dispatch =>{
+    localStorage.removeItem('token')
+    dispatch({type:LOGOUT_START})
 }
