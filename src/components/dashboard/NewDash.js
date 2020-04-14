@@ -15,6 +15,8 @@ import Container from '@material-ui/core/Container';
 import CardActionArea from '@material-ui/core/CardActionArea'
 import Link from '@material-ui/core/Link';
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory  } from 'react-router-dom'
+import NavBar from '../navbar/NavBar'
 
 import PostForm from '../postForm/PostForm'
 import { getPosts, getCurrentUser, getMyPosts } from '../../actions/index'
@@ -69,6 +71,7 @@ export default function Dash() {
   const currentState = useSelector(state => state)
   const [open, setOpen] = useState(false);
   const [myPosts, setMyPosts] = useState(false)
+  const history = useHistory();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -80,34 +83,29 @@ export default function Dash() {
 
   useEffect(() => {
     dispatch(getPosts())
-    dispatch(getCurrentUser())
+    if (currentState.isLoggedIn) {dispatch(getCurrentUser())}
   }, [])
   const fetchPosts = (userId) =>{
     myPosts?dispatch(getPosts()): dispatch(getMyPosts(userId))
   }
-  console.log(currentState)
+
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="relative">
-        <Toolbar>
-          <CameraIcon className={classes.icon} />
-          <Typography variant="h6" color="inherit" noWrap>
-            Album layout
-          </Typography>
-        </Toolbar>
-      </AppBar>
+      <NavBar/>
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="#e8eaf6" gutterBottom>
-              Welcome Back!
+              Welcome!
             </Typography>
             <Typography variant="h5" align="center" color="#e8eaf6" paragraph>
               Perfecting form is tapping your potential. <br />Be a part of something BIGGER!
             </Typography>
             <div className={classes.heroButtons}>
+              {/*Beginning of ternary statement */}
+              {currentState.isLoggedIn ? 
               <Grid container spacing={2} justify="center">
                 <Grid item>
                   <Button onClick={handleClickOpen} variant="contained" color="primary">
@@ -123,7 +121,16 @@ export default function Dash() {
                     {myPosts? 'All Posts':'My Posts'}
                   </Button>
                 </Grid>
+              </Grid>:
+              <Grid container spacing={2} justify="center">
+                <Grid item>
+                  <Button onClick={()=>history.push('/register', {register: true})} variant="contained" color="primary">
+                    Get Started
+                  </Button>
+                  <PostForm open={open} onClose={handleClose} />
+                </Grid>
               </Grid>
+            }
             </div>
           </Container>
         </div>

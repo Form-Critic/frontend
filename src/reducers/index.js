@@ -43,13 +43,14 @@ import{
     GET_CURRENT_USER_FAIL,
     CREATE_POST_START,
     CREATE_POST_SUCCESS,
-    CREATE_POST_FAIL
+    CREATE_POST_FAIL,
+    LOGOUT_START
 } from '../actions/index'
 
 const initialState = {
     token: '',
     isLoggingIn: false,
-    isLoggedIn: false,
+    isLoggedIn: localStorage.getItem("token")? true : false,
     loginError: '',
     registerError:'',
     postError:'',
@@ -312,8 +313,16 @@ export default (state = initialState, action) => {
                 post:{...state.post,...action.payload}
             }
         }
+        case LOGOUT_START: {
+            return{
+                ...state,
+                isLoggedIn: false,
+                currentUser: {}
+            }
+        }
         default:{
             return state
         }
     }
 }
+

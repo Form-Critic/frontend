@@ -73,6 +73,10 @@ export const GET_CURRENT_USER_START = 'GET_CURRENT_USER_START'
 export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS'
 export const GET_CURRENT_USER_FAIL = 'GET_CURRENT_USER_FAIL'
 
+const developement = "http://localhost:8080/api"
+const production = "https://form-critic.herokuapp.com/api"
+const api = production
+
 export const getCurrentUser = payload => dispatch =>{
     dispatch({type:GET_CURRENT_USER_START})
     axiosWithAuth()
@@ -90,12 +94,12 @@ export const getCurrentUser = payload => dispatch =>{
 export const postLoginUser = payload=>dispatch=>{
     dispatch({type:LOGIN_START})
     axios
-    .post('http://localhost:8080/api/users/login', payload.credentials)
+    .post(`${api}/users/login`, payload.credentials)
     .then(res=>{
         dispatch({type:LOGIN_SUCCESS, payload:res.data})
         console.log('token', res.data.token)
         localStorage.setItem('token', res.data.token)
-        payload.props.history.push('/dash')
+        payload.props.history.push('/home')
     })
     .catch(err => dispatch({ type: LOGIN_FAIL, payload: err }))
 }
@@ -103,7 +107,7 @@ export const postLoginUser = payload=>dispatch=>{
 export const postRegisterUser = payload=> dispatch=>{
     dispatch({type:REGISTER_START})
     axios
-    .post('http://localhost:8080/api/users/register', payload)
+    .post(`${api}/users/register`, payload)
     .then(res=>{
         dispatch({type:REGISTER_SUCCESS, payload:res.data})
     })
@@ -223,4 +227,9 @@ export const editPost = payload => dispatch =>{
     .put(`/posts/${payload.id}`, payload.edit)
     .then(res=>dispatch({type:UPDATE_POST_SUCCESS, payload: res.data}))
     .catch(err=>dispatch({type:UPDATE_POST_FAIL, payload:err}))
+}
+
+export const logOut = payload => dispatch =>{
+    localStorage.removeItem('token')
+    dispatch({type:LOGOUT_START})
 }

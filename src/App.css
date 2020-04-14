@@ -20,22 +20,39 @@
 .App-link {
   color: #09d3ac;
 }
+
+.nav-link {
+  padding: 0 40px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.nav-link:hover{
+  background: #303f9f;
+}
+.nav-link-wrap {
+    width: 90%; 
+    text-align: right;
+    display: flex; 
+    justify-content: flex-end;
+}
+
+.textDescription{
+  margin: 0 2%;
+  font-size: 14px;
+  text-align: left;
+  color: black;
+}
+.paper-wrap{
+  width: 50%;
+  padding: 15px;
+  margin: 0 auto
+}
+
 @media screen and (max-width: 700px) {
   .video{
     width: 400px;
     height:280px;
     margin: 0 auto;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .video{
-    /* width: 350px; */
-    height:250px;
-    margin: 0 auto;
-  }
-  .comments{
-    width: 100% !important;
   }
 }
 
@@ -46,4 +63,38 @@
   .makeStyles-text-8{
     margin-top:4% !important;
   }
+  .nav-link-wrap{
+    width: 80%;
+  }
+  .nav-link{
+    padding: 0 20px;
+  }
+  .paper-wrap{
+    width:100%;
+  } 
+}
+
+@media screen and (max-width: 500px) {
+  .video{
+    height:250px;
+    margin: 0 auto;
+  }
+  .comments{
+    width: 100% !important;
+  }
+  .nav-link{
+    padding: 0;
+  }
+  .nav-link-wrap{
+    /* width: 80%; */
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-evenly;
+  }
+  .form-critic-title{
+    display: none;
+  }
+
+
+
 }
