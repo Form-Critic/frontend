@@ -124,7 +124,7 @@ export default function Dash() {
               </Grid>:
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button onClick={()=>history.push('/register')} variant="contained" color="primary">
+                  <Button onClick={()=>history.push('/register', {register: true})} variant="contained" color="primary">
                     Get Started
                   </Button>
                   <PostForm open={open} onClose={handleClose} />
