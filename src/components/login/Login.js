@@ -12,7 +12,6 @@ const Login = (props) => {
 
     const changeHandler = (e)=>{
         setCredentials({...credentials, [e.target.name]: e.target.value})
-        console.log(e.target.name,e.target.value)
     }   
 
     return (
@@ -20,7 +19,10 @@ const Login = (props) => {
             <TextField fullWidth variant="outlined" onChange={changeHandler} name='username' required placeholder='username' label='username' autoFocus margin='normal'></TextField>
             <TextField fullWidth variant="outlined" onChange={changeHandler} name='password' required placeholder='password' label='password' type='password'  margin='normal'></TextField>
             <Button 
-            onClick={()=>{dispatch(postLoginUser({credentials, ...props}))}} 
+            onClick={(e)=>{
+                e.preventDefault()
+                dispatch(postLoginUser({credentials, ...props}))
+            }} 
             type="submit"
             fullWidth
             style={{margin: '6% auto 2% auto'}}

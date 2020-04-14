@@ -69,9 +69,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignInSide(props) {
-  console.log("these are my props", props)
+
   const classes = useStyles();
-  const [register, setRegister] = useState(props.location.state.register);
+  const reg = props.location.state ? props.location.state.register : true 
+  const [register, setRegister] = useState(reg);
 
   return (
     <Grid container component="main" className={classes.root}>

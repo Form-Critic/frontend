@@ -118,7 +118,6 @@ const Post = (props) => {
     function dateFormatter(datetime) {
         // let [date, time] = datetime.split(' ')
         if (datetime) {
-            console.log(new Date(Date.parse(datetime)))
             return (new Date(Date.parse(datetime)).toLocaleString().split(',')[0])
         }
     }

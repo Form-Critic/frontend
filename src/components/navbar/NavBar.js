@@ -11,18 +11,18 @@ const NavBar = () => {
     const currentState = useSelector(state => state)
     const dispatch = useDispatch()
     const history = useHistory ();
-    console.log("this is the good history", history)
+
     const loggedIn = currentState.isLoggedIn
 
 
-    function getImage(){
-        console.log("lets start this!")
-        // axios.get('https://img.youtube.com/vi/h44SIMOMdEI/sddefault.jpg')
-        axios.get('https://img.youtube.com/vi/vthMCtgVtFw/sddefault.jpg')
-        .then(res=>console.log(res))
-        .catch(err=>console.log("this is an error", err))
-        console.log("this is the image!!! ")
-      }
+    // function getImage(){
+    //     console.log("lets start this!")
+    //     // axios.get('https://img.youtube.com/vi/h44SIMOMdEI/sddefault.jpg')
+    //     axios.get('https://img.youtube.com/vi/vthMCtgVtFw/sddefault.jpg')
+    //     .then(res=>console.log(res))
+    //     .catch(err=>console.log("this is an error", err))
+    //     console.log("this is the image!!! ")
+    //   }
       
     
     
@@ -47,7 +47,7 @@ const NavBar = () => {
                  </Typography>
                  <div className="nav-link-wrap">
                     <Typography onClick={()=>onHome()} className="nav-link" variant="h6" color="inherit">Home</Typography>
-                    <Typography onClick={()=>{getImage()}}className="nav-link" variant="h6" color="inherit">About</Typography>
+                    <Typography className="nav-link" variant="h6" color="inherit">About</Typography>
                     <Typography onClick={()=>onLog()}className="nav-link" variant="h6" color="inherit">{ sign }</Typography>
                 </div>
                 </Toolbar>

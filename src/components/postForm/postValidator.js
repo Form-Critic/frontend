@@ -6,7 +6,7 @@ export default function validate(values) {
     }
     if (!values.video_link) {
         errors.video_link = 'YouTube link is required';
-        console.log(ytRegex.test(values.video_link))
+
     }
     else if (!ytRegex.test(values.video_link)) {
         errors.video_link = 'At the moment YouTube links are only supported. Please provide valid link.'
@@ -15,10 +15,10 @@ export default function validate(values) {
         errors.description = 'Description is required.'
     }
     else if (values.description.split(/\s+/).length<10){
-        console.log(values.description.split(/\s+/))
+
         errors.description = 'Description should be meaningful, please write at least 10 words.'
     }
 
-    console.log('these are the errors ', errors)
+
     return errors;
 };

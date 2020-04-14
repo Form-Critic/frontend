@@ -83,10 +83,8 @@ export const getCurrentUser = payload => dispatch =>{
     .get('/user')
     .then(res=>{
         dispatch({type:GET_CURRENT_USER_SUCCESS, payload:res.data})
-        console.log('res',res)
     })
     .catch(err=>{
-        console.log(err)
         dispatch({type:GET_CURRENT_USER_FAIL, payload:err})
     })
 }
@@ -97,7 +95,6 @@ export const postLoginUser = payload=>dispatch=>{
     .post(`${api}/users/login`, payload.credentials)
     .then(res=>{
         dispatch({type:LOGIN_SUCCESS, payload:res.data})
-        console.log('token', res.data.token)
         localStorage.setItem('token', res.data.token)
         payload.props.history.push('/home')
     })
@@ -112,7 +109,6 @@ export const postRegisterUser = payload=> dispatch=>{
         dispatch({type:REGISTER_SUCCESS, payload:res.data})
     })
     .catch(err=> {
-        console.log(err)
         dispatch({type:REGISTER_FAIL, payload: err})})
     
 }
@@ -125,7 +121,6 @@ export const getPosts = payload => dispatch =>{
         dispatch( {type:GET_POSTS_SUCCESS, payload:res.data})
     })
     .catch(err=>{
-        console.log(err)
         dispatch({type:GET_POSTS_FAIL, payload: err})
     })
 }
@@ -138,13 +133,11 @@ export const getMyPosts = payload => dispatch =>{
         dispatch( {type:GET_MYPOSTS_SUCCESS, payload:res.data})
     })
     .catch(err=>{
-        console.log(err)
         dispatch({type:GET_MYPOSTS_FAIL, payload: err})
     })
 }
 
 export const getPost = payload => dispatch =>{
-    console.log(payload)
     dispatch({type:GET_POST_START})
     axiosWithAuth()
     .get(`/posts/${payload.params.id}`)
@@ -152,7 +145,6 @@ export const getPost = payload => dispatch =>{
         dispatch({type:GET_POST_SUCCESS, payload:res.data})
     })
     .catch(err=>{
-        console.log(err)
         dispatch({type:GET_POST_FAIL, payload: err})
     })
 }
@@ -165,13 +157,11 @@ export const getComments = payload => dispatch =>{
         dispatch({type:GET_COMMENT_SUCCESS, payload:res.data})
     })
     .catch(err=>{
-        console.log(err)
         dispatch({type:GET_COMMENT_FAIL, payload: err})
     })
 }
 
 export const postComment = payload => dispatch =>{
-    console.log(payload)
     dispatch({type:CREATE_COMMENT_START})
     axiosWithAuth()
     .post(`/posts/${payload.id}/comments`,payload.newComment)
@@ -179,41 +169,34 @@ export const postComment = payload => dispatch =>{
         dispatch({type:CREATE_COMMENT_SUCCESS, payload:res.data})
     })
     .catch(err=>{
-        console.log(err)
         dispatch({type:CREATE_COMMENT_FAIL, payload: err})
     })
 }
 
 export const deleteComment = payload => dispatch=>{
-    console.log(payload)
     const commentId = payload
     dispatch({type:DELETE_COMMENT_START})
     axiosWithAuth()
     .delete(`/posts/comments/${commentId}`)
     .then(res=>{
-        console.log('delete', res)
         dispatch({type:DELETE_COMMENT_SUCCESS, payload:res.data})
     })
     .catch(err=>{
-        console.log(err)
         dispatch({type:DELETE_COMMENT_FAIL, payload:err})
     })
 }
 
 export const createPost = payload => dispatch =>{
-    console.log(payload)
     dispatch({type:CREATE_POST_START})
     axiosWithAuth()
     .post('/posts', payload)
     .then(res=>dispatch({type:CREATE_POST_SUCCESS, payload: res.data}))
     .catch(err=>{
-        console.log(err)
         dispatch({type:CREATE_POST_FAIL, payload: err})
     })
 }
 
 export const deletePost = payload => dispatch =>{
-    console.log(payload)
     dispatch({type:DELETE_POST_START})
     axiosWithAuth()
     .delete(`/posts/${payload}`)
