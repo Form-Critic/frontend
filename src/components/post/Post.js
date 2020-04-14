@@ -15,6 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPost, getComments, getCurrentUser } from '../../actions/index'
+import NavBar from '../navbar/NavBar'
 import Comments from './Comments'
 import Footer from '../general/Copyright'
 
@@ -23,11 +24,11 @@ import EditPost from '../editPage/EditPost'
 const useStyles = makeStyles(theme => ({
 
     root: {
-        margin: '5% auto',
+        margin: '3% auto',
         width: '90%',
-        display:'flex',
-        flexDirection:'column',
-        justifyContent:'flex-start'
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start'
     },
     content: {
         margin: '5% auto',
@@ -41,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     commentContainer: {
         display: 'flex',
         justifyContent: 'center',
-        width:'80%',
+        width: '80%',
         margin: '4% auto 0 auto'
     },
     comment: {
@@ -75,23 +76,17 @@ const useStyles = makeStyles(theme => ({
 
     },
     text: {
-        width:'90%',
+        width: '90%',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-start',
         alignContent: 'center',
         margin: '0 4%',
     },
-    textDescription: {
-        textAlign: 'left',
-        margin: '0 2%',
-        fontSize: '14px',
-        textAlign: 'left',
-        color:'black'
-    },
-    postInfo:{ 
-        display: 'flex', 
-        justifyContent: 'flex-start', 
+    postInfo: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        flexDirection: 'column',
         alignItems: 'center'
     }
 })
@@ -133,29 +128,30 @@ const Post = (props) => {
         <div>
             <CssBaseline />
             <AppBar position="relative">
-                <Toolbar>
-                    <CameraIcon className={classes.icon} />
-                    <Typography variant="h6" color="inherit" noWrap> Form Critic </Typography>
-                </Toolbar>
+                <NavBar />
             </AppBar>
             {/* <div><Typography style={{fontSize:'16px'}}variant='subtitle1'>{post.date}</Typography></div> */}
             <div className={classes.root}>
+                <Typography style={{ marginBottom: "3%", alignSelf: "center" }} variant='h3'>{state.post.title}</Typography>
                 <div className={classes.postInfo}>
                     <div>
                         <iframe
                             className='video'
                             title='video'
-                            width="480"
-                            height="270"
+                            width="600"
+                            height="340"
                             src={embedLink}
                             allowFullScreen
                             frameBorder="0"
                         >
                         </iframe>
                     </div>
+                    <Typography variant="overline" display="block" gutterBottom>
+                    Post by {state.post.username} on {dateFormatter(state.post.date)}
+                    </Typography>
                     <div className={classes.text}>
                         <div style={{ display: 'flex', margin: '0 auto' }}>
-                            <Typography style={{ marginBottom: '3%', fontSize: '22px' }} variant='h2'>{state.post.title}</Typography>
+                            {/* <Typography style={{ marginBottom: '3%', fontSize: '22px' }} variant='h2'>{state.post.title}</Typography> */}
                             {!state.currentUser.id ? null : state.post.user_id === state.currentUser.id ?
                                 <>
                                     <EditIcon onClick={handleClickOpen} fontSize='medium' color='primary' style={{ margin: '0 4px', cursor: 'pointer' }}>
@@ -164,16 +160,16 @@ const Post = (props) => {
                                 </>
                                 : null}
                         </div>
-                        <div className={classes.subtitle}>
+                        {/* <div className={classes.subtitle}>
                             <Avatar src={state.post.avatar}></Avatar>
                             <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{state.post.username}</Typography>
                             <Typography style={{ fontSize: '16px' }} variant='subtitle1'>{dateFormatter(state.post.date)}</Typography>
-                        </div>
+                        </div> */}
 
-                        <div >
+                        <Paper className="paper-wrap">
                             {/* <Typography variant='h4' style={{ margin: '1% 0 1% 0' }}>Description</Typography> */}
-                            <Typography className={classes.textDescription} variant='h4'>{state.post.description}</Typography>
-                        </div>
+                            <Typography className={classes.textDescription} variant='body1'>{state.post.description}</Typography>
+                        </Paper>
                     </div>
                 </div>
                 <div className={classes.commentContainer}>

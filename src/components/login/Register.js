@@ -19,7 +19,7 @@ const Register = (props) => {
             <TextField fullWidth  variant="outlined" name='name' onChange={changeHandler} required placeholder='name' label='name' autoFocus margin='normal'></TextField>
             <TextField fullWidth  variant="outlined" name='email' onChange={changeHandler} required placeholder='email' label='email'  margin='normal'></TextField>
             <TextField fullWidth  variant="outlined" name='username' onChange={changeHandler} required placeholder='username' label='username'  margin='normal'></TextField>
-            <TextField fullWidth  variant="outlined" name='password' onChange={changeHandler} required placeholder='password' label='password'  margin='normal'></TextField>
+            <TextField fullWidth  variant="outlined" name='password' onChange={changeHandler} required placeholder='password' label='password' type='password' margin='normal'></TextField>
             <Button 
             onClick={()=>{dispatch(postRegisterUser({credentials,props}))}} 
             type="submit"

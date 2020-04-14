@@ -30,8 +30,8 @@ function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://uzias.now.sh/">
-       uzias.now.sh
+        <Link color="inherit" href="https://www.uziasrivera.com/">
+        uziasrivera.com
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}

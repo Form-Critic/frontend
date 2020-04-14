@@ -15,15 +15,16 @@ import { useSelector } from 'react-redux'
 
 
 function App(props) {
+
   const loggedIn = useSelector(state => state.isLoggedIn)
-  console.log("this is logged in", loggedIn)
+
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route path='/register' component={loggedIn? NewDash : NewSiginIn} props={props}/>
           <Route path='/home' component={NewDash} props={props}/>
-          <PrivateRoute exact path='/post/:id' component={Post} props={props}/>
+          <Route exact path='/post/:id' component={Post} props={props}/>
           {/* <PrivateRoute path='/NewPost' component={PostForm} props={props}/> */}
           <PrivateRoute exact path='/post/:id/edit' component={EditPost} props={props}/>
           <Route exact={true} component={NewDash}/>

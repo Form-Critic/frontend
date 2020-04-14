@@ -21,8 +21,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://uzias.now.sh/">
-     uzias.now.sh
+      <Link color="inherit" href="https://www.uziasrivera.com/">
+      uziasrivera.com
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -69,8 +69,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignInSide(props) {
+  console.log("these are my props", props)
   const classes = useStyles();
-  const [register, setRegister] = useState(true);
+  const [register, setRegister] = useState(props.location.state.register);
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -98,6 +99,7 @@ export default function SignInSide(props) {
               <Switch
         value="checkedA"
         color="primary"
+        checked={!register}
         onChange={e=>{setRegister(!register)}}
         inputProps={{ 'aria-label': 'secondary checkbox' }}
         />

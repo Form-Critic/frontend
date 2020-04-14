@@ -18,7 +18,7 @@ const Login = (props) => {
     return (
         <>
             <TextField fullWidth variant="outlined" onChange={changeHandler} name='username' required placeholder='username' label='username' autoFocus margin='normal'></TextField>
-            <TextField fullWidth variant="outlined" onChange={changeHandler} name='password' required placeholder='password' label='password'  margin='normal'></TextField>
+            <TextField fullWidth variant="outlined" onChange={changeHandler} name='password' required placeholder='password' label='password' type='password'  margin='normal'></TextField>
             <Button 
             onClick={()=>{dispatch(postLoginUser({credentials, ...props}))}} 
             type="submit"

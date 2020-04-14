@@ -1,5 +1,6 @@
 import React,{ useState, useEffect } from 'react'
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
+import ButtonM from '@material-ui/core/Button';
 import { useSelector, useDispatch} from 'react-redux'
 import { postComment, getCurrentUser } from '../../actions/index'
 //component
@@ -16,7 +17,7 @@ const Comments = ({ comments, props}) => {
 
     useEffect(()=>{
         //grabs info of the user that is logged in!
-        dispatch(getCurrentUser())
+        if (currentState.isLoggedIn) { dispatch(getCurrentUser()) }
     },[])
 
     return (
@@ -24,6 +25,7 @@ const Comments = ({ comments, props}) => {
          <Header as='h3' dividing>
             Comments
         </Header>
+        {currentState.isLoggedIn ?
         <Form reply>
             <Form.TextArea 
             name='comment'
@@ -37,6 +39,11 @@ const Comments = ({ comments, props}) => {
                 setNewComment({comment:''})
             }} content='Post Comment' labelPosition='left' icon='edit' primary />
         </Form>
+        :
+        <>
+            <ButtonM>Login</ButtonM>
+            <ButtonM>Sign Up</ButtonM>
+        </>}
         {comments.map(comment => <CommentComp key={comment.id} comment={comment} op={currentState.post.id===comment.user_id} currentUserId={currentState.currentUser.id}/>)}
     </Comment.Group>
     )
