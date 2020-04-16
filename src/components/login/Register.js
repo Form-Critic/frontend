@@ -11,7 +11,6 @@ import validate from '../../utils/form-validation/postValidator'
 
 const Register = (props) => {
     const dispatch = useDispatch()
-    const [credentials, setCredentials] = useState({})
     
     const handleRegister = ()=>{
         dispatch(postRegisterUser({values,props}))

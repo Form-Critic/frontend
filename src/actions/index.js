@@ -90,9 +90,10 @@ export const getCurrentUser = payload => dispatch =>{
 }
 
 export const postLoginUser = payload=>dispatch=>{
+    console.log(payload)
     dispatch({type:LOGIN_START})
     axios
-    .post(`${api}/users/login`, payload.credentials)
+    .post(`${api}/users/login`, payload.values)
     .then(res=>{
         dispatch({type:LOGIN_SUCCESS, payload:res.data})
         localStorage.setItem('token', res.data.token)
