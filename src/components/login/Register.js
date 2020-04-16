@@ -3,19 +3,18 @@ import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import useForm from '../postForm/useForm'
+import useForm from '../../utils/form-validation/useForm'
 import { useSelector, useDispatch} from 'react-redux'
 import { postRegisterUser } from '../../actions/index'
-import validate from '../postForm/postValidator'
+import validate from '../../utils/form-validation/postValidator'
 
 
 const Register = (props) => {
     const dispatch = useDispatch()
-    const currentState = useSelector(state=>state)
     const [credentials, setCredentials] = useState({})
     
     const handleRegister = ()=>{
-        dispatch(postRegisterUser({credentials,props}))
+        dispatch(postRegisterUser({values,props}))
     }
     
     const {

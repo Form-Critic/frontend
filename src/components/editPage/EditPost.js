@@ -9,8 +9,8 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { editPost } from '../../actions/index'
-import validate from '../postForm/postValidator'
-import useForm from '../postForm/useForm'
+import validate from '../../utils/form-validation/postValidator'
+import useForm from '../../utils/form-validation/useForm'
 
 // this is me trying to do benchpress, just kidding it's Jeff. If you're having trouble performing this exercise, check this video out!
 
