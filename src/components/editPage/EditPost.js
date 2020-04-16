@@ -9,7 +9,7 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { editPost } from '../../actions/index'
-import validate from './editValidator'
+import validate from '../postForm/postValidator'
 import useForm from '../postForm/useForm'
 
 // this is me trying to do benchpress, just kidding it's Jeff. If you're having trouble performing this exercise, check this video out!
@@ -51,7 +51,7 @@ export default function EditPost(props) {
         errors,
         handleChange,
         handleSubmit,
-    } = useForm(submitPost, validate, {title, description});
+    } = useForm(submitPost, validate, "edit", {title, description});
 
     function submitPost(edit) {
         dispatch(editPost({edit,id:id}))
