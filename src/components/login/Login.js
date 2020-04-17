@@ -22,7 +22,6 @@ const Login = (props) => {
         handleSubmit,
       } = useForm(handleLogin, validate, "login");
  
-      console.log(values)
 
     return (
         <>
