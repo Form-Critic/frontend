@@ -20,7 +20,6 @@ const useForm = (callback, validate, type="post", edit) => {
     }, [errors]);
 
     const handleSubmit = (event) => {
-        console.log("hello there")
         if (event) event.preventDefault();
         setErrors(validate(values, type));
         setIsSubmitting(true);
@@ -31,7 +30,6 @@ const useForm = (callback, validate, type="post", edit) => {
         setValues(values => ({ ...values, [event.target.name]: event.target.value }));
     };
 
-    console.log("these are the errors", errors)
     return {
         handleChange,
         handleSubmit,

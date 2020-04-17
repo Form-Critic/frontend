@@ -70,7 +70,6 @@ export default function validate(values, formType="post") {
             }
             break
         case "register":
-            console.log(values)
             if (!values.name){
                 errors.name = "Name is required"
             }
