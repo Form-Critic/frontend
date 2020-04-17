@@ -16,8 +16,8 @@ import { Dialog } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import exercises from './options'
 import { createPost } from '../../actions/index'
-import validate from './postValidator'
-import useForm from './useForm'
+import validate from '../../utils/form-validation/postValidator'
+import useForm from '../../utils/form-validation/useForm'
 
 const useStyles = makeStyles(theme => ({
   root: {

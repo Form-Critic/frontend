@@ -1,14 +1,15 @@
-// const useForm = (callback, validate) => {
+
 import { useState, useEffect } from 'react';
-// import { edit } from 'external-editor';
 
-const useForm = (callback, validate, edit) => {
+const useForm = (callback, validate, type="post", edit) => {
 
-    const [values, setValues] = useState({
+    const [values, setValues] = useState(()=>{
+       return edit? {
         description: edit? edit.description: '',
         title: edit? edit.title: ''
-
+    } : {}
     });
+
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -19,8 +20,9 @@ const useForm = (callback, validate, edit) => {
     }, [errors]);
 
     const handleSubmit = (event) => {
+        console.log("hello there")
         if (event) event.preventDefault();
-        setErrors(validate(values));
+        setErrors(validate(values, type));
         setIsSubmitting(true);
     };
 
@@ -29,6 +31,7 @@ const useForm = (callback, validate, edit) => {
         setValues(values => ({ ...values, [event.target.name]: event.target.value }));
     };
 
+    console.log("these are the errors", errors)
     return {
         handleChange,
         handleSubmit,
