@@ -6,15 +6,17 @@ import useForm from '../../utils/form-validation/useForm'
 import validate from '../../utils/form-validation/postValidator'
 
 
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { postLoginUser } from '../../actions/index'
 
 const Login = (props) => {
     const dispatch = useDispatch()
+    const currentState = useSelector(state=>state)
 
     const handleLogin = () =>{
         dispatch(postLoginUser({values, ...props}))
     }
+
     const {
         values,
         errors,
@@ -28,7 +30,8 @@ const Login = (props) => {
             <TextField fullWidth value={values.username} variant="outlined" onChange={handleChange} name='username' required placeholder='username' label='username' autoFocus margin='normal'></TextField>
             {errors.username && (<Typography color='error' className="help is-danger error-text">{errors.username}</Typography>)}            
             <TextField fullWidth value={values.password} variant="outlined" onChange={handleChange} name='password' required placeholder='password' label='password' type='password'  margin='normal'></TextField>
-            {errors.password && (<Typography color='error' className="help is-danger error-text">{errors.password}</Typography>)}            
+            {errors.password && (<Typography color='error' className="help is-danger error-text">{errors.password}</Typography>)}
+            {currentState.loginError && (<Typography color='error' className="help is-danger">Incorrect Username or Password</Typography>)}            
             <Button 
             onClick={(e)=>{
                 handleSubmit(e)

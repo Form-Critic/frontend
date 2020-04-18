@@ -79,7 +79,7 @@ const api = production
 
 export const getCurrentUser = payload => dispatch =>{
     dispatch({type:GET_CURRENT_USER_START})
-    axiosWithAuth()
+    axiosWithAuth(payload.token)
     .get('/user')
     .then(res=>{
         dispatch({type:GET_CURRENT_USER_SUCCESS, payload:res.data})
@@ -90,7 +90,6 @@ export const getCurrentUser = payload => dispatch =>{
 }
 
 export const postLoginUser = payload=>dispatch=>{
-    console.log(payload)
     dispatch({type:LOGIN_START})
     axios
     .post(`${api}/users/login`, payload.values)
