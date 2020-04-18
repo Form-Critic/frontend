@@ -14,18 +14,6 @@ const NavBar = () => {
 
     const loggedIn = currentState.isLoggedIn
 
-
-    // function getImage(){
-    //     console.log("lets start this!")
-    //     // axios.get('https://img.youtube.com/vi/h44SIMOMdEI/sddefault.jpg')
-    //     axios.get('https://img.youtube.com/vi/vthMCtgVtFw/sddefault.jpg')
-    //     .then(res=>console.log(res))
-    //     .catch(err=>console.log("this is an error", err))
-    //     console.log("this is the image!!! ")
-    //   }
-      
-    
-    
     const onHome = () =>{
         history.push('/home')
     }

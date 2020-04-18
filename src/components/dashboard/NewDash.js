@@ -83,7 +83,7 @@ export default function Dash() {
 
   useEffect(() => {
     dispatch(getPosts())
-    if (currentState.isLoggedIn) {dispatch(getCurrentUser())}
+    if (currentState.isLoggedIn) {dispatch(getCurrentUser({token: currentState.token}))}
   }, [])
   const fetchPosts = (userId) =>{
     myPosts?dispatch(getPosts()): dispatch(getMyPosts(userId))
