@@ -13,7 +13,6 @@ const NavBar = () => {
     const history = useHistory ();
 
     const loggedIn = currentState.isLoggedIn
-      
     const onHome = () =>{
         history.push('/home')
     }

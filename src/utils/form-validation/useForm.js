@@ -29,7 +29,6 @@ const useForm = (callback, validate, type="post", edit) => {
         event.persist();
         setValues(values => ({ ...values, [event.target.name]: event.target.value }));
     };
-
     return {
         handleChange,
         handleSubmit,
