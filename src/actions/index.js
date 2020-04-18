@@ -79,7 +79,8 @@ const api = production
 
 export const getCurrentUser = payload => dispatch =>{
     dispatch({type:GET_CURRENT_USER_START})
-    axiosWithAuth(payload.token)
+    const token = payload ? payload.token : null
+    axiosWithAuth(token)
     .get('/user')
     .then(res=>{
         dispatch({type:GET_CURRENT_USER_SUCCESS, payload:res.data})
