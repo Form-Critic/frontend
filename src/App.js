@@ -7,9 +7,7 @@ import PrivateRoute from './utils/PrivateRoute'
 import NewDash from './components/dashboard/NewDash'
 import NewSiginIn from './components/login/NewSignIn'
 import Post from './components/post/Post'
-import PostForm from './components/postForm/PostForm'
 import EditPost from './components/editPage/EditPost'
-import NavBar from './components/navbar/NavBar'
 import './App.css';
 import { useSelector } from 'react-redux'
 

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-function axiosWithAuth(){
-    const token = localStorage.getItem('token')
+function axiosWithAuth(optionalToken=''){
+    const token = localStorage.getItem('token') || optionalToken
     
     const developement = "http://localhost:8080/api"
     const production = "https://form-critic.herokuapp.com/api"

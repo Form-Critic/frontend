@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -22,7 +22,7 @@ function Copyright() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://www.uziasrivera.com/">
-      uziasrivera.com
+        uziasrivera.com
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
   lastGrid: {
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems:'center',
+    alignItems: 'center',
     alignContent: 'center',
   }
 }));
@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme => ({
 export default function SignInSide(props) {
 
   const classes = useStyles();
-  const reg = props.location.state ? props.location.state.register : true 
+  const reg = props.location.state ? props.location.state.register : true
   const [register, setRegister] = useState(reg);
 
   return (
@@ -88,24 +88,24 @@ export default function SignInSide(props) {
           </Typography>
           <form className={classes.form} noValidate>
             {/* Bringing Components over! */}
-          {register?<Register props={props}/>:<Login props={props}/>}
+            {register ? <Register props={props} /> : <Login props={props} />}
             <Grid className={classes.lastGrid} container>
-            <Grid item>
-              <Link href="#" variant="body2">
-                Forgot password?
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Forgot password?
               </Link>
+              </Grid>
+              <Grid item>
+                <Typography variant='p'>Already Have An Account?</Typography>
+                <Switch
+                  value="checkedA"
+                  color="primary"
+                  checked={!register}
+                  onChange={e => { setRegister(!register) }}
+                  inputProps={{ 'aria-label': 'secondary checkbox' }}
+                />
+              </Grid>
             </Grid>
-            <Grid item>
-              <Typography variant='p'>Already Have An Account?</Typography>
-              <Switch
-        value="checkedA"
-        color="primary"
-        checked={!register}
-        onChange={e=>{setRegister(!register)}}
-        inputProps={{ 'aria-label': 'secondary checkbox' }}
-        />
-            </Grid>
-          </Grid>
             <Box mt={5}>
               <Copyright />
             </Box>
