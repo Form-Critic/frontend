@@ -21,7 +21,7 @@ const NavBar = () => {
         if (loggedIn){
             dispatch(logOut())
         }
-        history.push('/register', {register:false})
+        history.push('/register', {register:true})
         
     }
     const sign = loggedIn ? "Sign Out" : "Sign Up"
