@@ -16,8 +16,8 @@ import { Dialog } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import exercises from './options'
 import { createPost } from '../../actions/index'
-import validate from './postValidator'
-import useForm from './useForm'
+import validate from '../../utils/form-validation/postValidator'
+import useForm from '../../utils/form-validation/useForm'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -70,8 +70,8 @@ const useStyles = makeStyles(theme => ({
   },
 
   field: {
-    width: '100%',
-    margin: '3% auto',
+    width: '95%',
+    margin: '3%',
   },
   formControl: {
     margin: theme.spacing(1),
@@ -93,11 +93,20 @@ const PostForm = (props) => {
     errors,
     handleChange,
     handleSubmit,
+    setValues
   } = useForm(submitPost, validate);
 
   const handleClose = () => {
     onClose();
   };
+
+  const clearForm = () =>{
+    setValues({
+      description:"",
+      title:"",
+      video_link:""
+    })
+  }
 
   function submitPost(completePost) {
     dispatch(createPost(completePost))
@@ -133,7 +142,7 @@ const PostForm = (props) => {
             value={values.video_link || ''}
             onChange={handleChange}>
           </TextField>
-          {errors.video_link && (<Typography color='error' className="help is-danger">{errors.video_link}</Typography>)} 
+          {errors.video_link && (<Typography color='error' className="help is-danger">{errors.video_link}</Typography>)}
           <FormControl className={classes.field}>
             <InputLabel ref={inputLabel}>
               Exercise
@@ -166,7 +175,10 @@ const PostForm = (props) => {
             helperText="Please explain in as much detail as possible what you feel when performing this exercise and any other relevant information"
           />
           {errors.description && (<Typography color='error' className="help is-danger">{errors.description}</Typography>)}
-          <Button className={classes.field} variant="contained" color="primary" type="submit">SUBMIT</Button>
+          <div style={{display:"flex"}}>
+            <Button className={classes.field} variant="contained" color="secondary" onClick={()=>clearForm()}>Clear</Button>
+            <Button className={classes.field} variant="contained" color="primary" type="submit">SUBMIT</Button>
+          </div>
         </form>
       </Paper>
     </Dialog>
