@@ -22,7 +22,7 @@ const DeletePostSelect = (props) => {
 
     return (
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', alignContent:'center', alignItems:'center'}}>
             <Link href={`/post/${postId}`}>
                 <Button size="small" color="primary">
                     View
