@@ -34,6 +34,7 @@ const useForm = (callback, validate, type="post", edit) => {
         handleSubmit,
         values,
         errors,
+        setValues
     }
 };
 
