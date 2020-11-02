@@ -93,6 +93,7 @@ export default (state = initialState, action) => {
             }
         }
         case REGISTER_FAIL:{
+            console.log(action.payload)
             return{
                 ...state,
                 isLoggedIn:false,

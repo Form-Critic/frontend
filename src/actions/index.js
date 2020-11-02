@@ -73,7 +73,7 @@ export const GET_CURRENT_USER_START = 'GET_CURRENT_USER_START'
 export const GET_CURRENT_USER_SUCCESS = 'GET_CURRENT_USER_SUCCESS'
 export const GET_CURRENT_USER_FAIL = 'GET_CURRENT_USER_FAIL'
 
-const developement = "http://localhost:8080/api"
+const development = "http://localhost:8080/api"
 const production = "https://form-critic.herokuapp.com/api"
 const api = production
 
@@ -104,6 +104,7 @@ export const postLoginUser = payload=>dispatch=>{
 
 export const postRegisterUser = payload=> dispatch=>{
     dispatch({type:REGISTER_START})
+    console.log(payload)
     axios
     .post(`${api}/users/register`, payload)
     .then(res=>{
