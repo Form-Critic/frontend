@@ -1,7 +1,7 @@
 import React from 'react'
 import Dialog from '@material-ui/core/Dialog'
 import Paper from '@material-ui/core/Paper'
-import { makeStyles } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import Typography from '@material-ui/core/Typography';
@@ -51,10 +51,10 @@ export default function EditPost(props) {
         errors,
         handleChange,
         handleSubmit,
-    } = useForm(submitPost, validate, "edit", {title, description});
+    } = useForm(submitPost, validate, "edit", { title, description });
 
     function submitPost(edit) {
-        dispatch(editPost({edit,id:id}))
+        dispatch(editPost({ edit, id: id }))
         handleClose()
     }
 
